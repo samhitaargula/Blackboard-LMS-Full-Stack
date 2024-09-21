@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package edu.iit.sat.itmd4515.sargula.web;
+package edu.iit.sat.itmd4515.sargula.lab3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
