@@ -29,8 +29,8 @@ Q. Why are these dependencies required if we already have the javaee-api in our 
     **Course - Discussion**
   
     A Course can have one or more Discussions
-  
 
+<br/>
 
 **JPA test class**
 ![image](https://github.com/user-attachments/assets/66ba08ca-3337-4fa6-99f9-cad78d45b3cb)
@@ -91,5 +91,58 @@ BUILD SUCCESS
 ------------------------------------------------------------------------
 Total time:  5.922 s
 Finished at: 2024-09-21T15:17:06-05:00
+------------------------------------------------------------------------
+```
+<br/>
+
+**Validation test class**
+![image](https://github.com/user-attachments/assets/078a7b0d-2f29-42c3-9b44-ed19619fad98)
+
+```
+cd C:\Users\nothi\OneDrive\Documents\NetBeansProjects\sargula-fp; "JAVA_HOME=C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.12.7-hotspot" cmd /c "\"C:\\Program Files\\NetBeans-22\\netbeans\\java\\maven\\bin\\mvn.cmd\" -Dtest=edu.iit.sat.itmd4515.sargula.LessonValidationTest \"-Dmaven.ext.class.path=C:\\Program Files\\NetBeans-22\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar\" --no-transfer-progress process-test-classes surefire:test"
+Scanning for projects...
+
+--------------< edu.iit.sat.itmd4515.sargula:sargula-fp >---------------
+Building sargula-fp-1.0-SNAPSHOT 1.0-SNAPSHOT
+  from pom.xml
+--------------------------------[ war ]---------------------------------
+
+--- resources:3.3.1:resources (default-resources) @ sargula-fp ---
+Copying 1 resource from src\main\resources to target\classes
+
+--- compiler:3.8.1:compile (default-compile) @ sargula-fp ---
+Nothing to compile - all classes are up to date
+
+--- resources:3.3.1:testResources (default-testResources) @ sargula-fp ---
+skip non existing resourceDirectory C:\Users\nothi\OneDrive\Documents\NetBeansProjects\sargula-fp\src\test\resources
+
+--- compiler:3.8.1:testCompile (default-testCompile) @ sargula-fp ---
+Changes detected - recompiling the module!
+Compiling 2 source files to C:\Users\nothi\OneDrive\Documents\NetBeansProjects\sargula-fp\target\test-classes
+
+--- surefire:3.2.2:test (default-cli) @ sargula-fp ---
+Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running edu.iit.sat.itmd4515.sargula.LessonValidationTest
+Sep 22, 2024 4:26:23 PM org.hibernate.validator.internal.util.Version <clinit>
+INFO: HV000001: Hibernate Validator 8.0.1.Final
+Lesson title invalid: Lesson{id=null, title= , lessonDate=2022-12-20, type=INTRO}
+Lesson date valid: Lesson{id=null, title=Test, lessonDate=2022-12-20, type=INTRO}
+Lesson title valid: Lesson{id=null, title=Test, lessonDate=2022-12-20, type=INTRO}
+Lesson date invalid: Lesson{id=null, title=Test, lessonDate=2026-12-20, type=INTRO}
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.439 s -- in edu.iit.sat.itmd4515.sargula.LessonValidationTest
+
+Results:
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time:  6.143 s
+Finished at: 2024-09-22T16:26:23-05:00
 ------------------------------------------------------------------------
 ```
