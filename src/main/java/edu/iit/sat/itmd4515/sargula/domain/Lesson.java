@@ -39,9 +39,18 @@ public class Lesson {
     @Enumerated(EnumType.STRING)
     private LessonType type;
 
+    /**
+     * Default constructor
+     */
     public Lesson() {
     }
 
+    /**
+     * Parameterized constructor
+     * @param title
+     * @param lessonDate
+     * @param type
+     */
     public Lesson(String title, LocalDate lessonDate, LessonType type) {
         this.title = title;
         this.lessonDate = lessonDate;
@@ -66,14 +75,29 @@ public class Lesson {
         this.id = id;
     }
 
+    /**
+     * Get the value of title
+     * 
+     * @return String
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Set the value of title
+     * 
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Method to get hash code
+     * 
+     * @return int
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -81,6 +105,12 @@ public class Lesson {
         return hash;
     }
 
+    /**
+     * Equals method to compare objects
+     * 
+     * @param obj
+     * @return Boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -101,22 +131,47 @@ public class Lesson {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Get the value of date
+     * 
+     * @return LocalDate
+     */
     public LocalDate getLessonDate() {
         return lessonDate;
     }
 
+    /**
+     * Set the value of date
+     * 
+     * @param lessonDate
+     */
     public void setLessonDate(LocalDate lessonDate) {
         this.lessonDate = lessonDate;
     }
 
+    /**
+     * Get the value of type
+     * 
+     * @return LessonType
+     */
     public LessonType getType() {
         return type;
     }
 
+    /**
+     * Set the value of type
+     * 
+     * @param type
+     */
     public void setType(LessonType type) {
         this.type = type;
     }
 
+    /**
+     * Writes Lesson fields in string
+     * 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Lesson{" + "id=" + id + ", title=" + title + ", lessonDate=" + lessonDate + ", type=" + type + '}';
