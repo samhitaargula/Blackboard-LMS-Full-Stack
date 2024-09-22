@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LessonValidationTest {
     private static Validator validator;
-    private Lesson l = new Lesson("Test", LocalDate.of(2022,12,20), LessonType.INTRO);
+    private final Lesson l = new Lesson("Test", LocalDate.of(2022,12,20), LessonType.INTRO);
 
     @BeforeAll
     public static void beforeAll() {
