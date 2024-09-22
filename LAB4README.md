@@ -8,7 +8,28 @@ Q. Why are these dependencies required if we already have the javaee-api in our 
 1. I have chosen the **Education/Learning domain** to build a Learning Management System like Canvas. I felt this would be a good domain for final project and I can get ideas of the visual structure from our Canvas.
 
 
-2. Write a second paragraph answering the following questions: There is only one entity required for Lab 4, but what other entities from your business domain can you think of? How might they relate to one another? You can answer this in narrative form, or you can answer it with a database diagram. One of your midterm questions will be very similar, about the design of your FP, so this is to help get you started early.
+2. Other entities could be: Module, Course, Assignment, Grades, Discussion etc.
+  
+    **Module - Lesson**
+    
+    A Module contains multiple Lessons
+    
+    **Course - Module**
+    
+    A Course contains multiple Modules
+    
+    **Lesson - Assignment**
+    
+    A Lesson can have multiple Assignments
+  
+    **Student - Grade**
+  
+    A Student user receives multiple Grades
+  
+    **Course - Discussion**
+  
+    A Course can have one or more Discussions
+  
 
 
 **JPA test class**
