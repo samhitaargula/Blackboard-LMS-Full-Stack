@@ -16,11 +16,12 @@ import jakarta.annotation.sql.DataSourceDefinition;
         className = "com.mysql.cj.jdbc.MysqlDataSource",
         serverName = "localhost",
         portNumber = 3306,
-        databaseName = "sakila",
+        databaseName = "itmd4515",
         user = "itmd4515",
         password = "itmd4515",
         properties = {
             "zeroDateTimeBehavior=CONVERT_TO_NULL",
+            "serverTimezone=America/Chicago",
             "useSSL=false"
         }
 )
