@@ -11,10 +11,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,16 +31,26 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotBlank
     @Column(nullable = false)
     private String title;
-    
+
     @PastOrPresent
     private LocalDate lessonDate;
-    
+
     @Enumerated(EnumType.STRING)
     private LessonType type;
+
+    /**
+     * ManyToMany bi-directional relationship Student is owning side Lesson is
+     * inverse side
+     *
+     * This is inverse side
+     *
+     */
+    @ManyToMany(mappedBy = "lessons")
+    private List<Student> student = new ArrayList<>();
 
     /**
      * Default constructor
@@ -47,6 +60,7 @@ public class Lesson {
 
     /**
      * Parameterized constructor
+     *
      * @param title
      * @param lessonDate
      * @param type
@@ -77,7 +91,7 @@ public class Lesson {
 
     /**
      * Get the value of title
-     * 
+     *
      * @return String
      */
     public String getTitle() {
@@ -86,7 +100,7 @@ public class Lesson {
 
     /**
      * Set the value of title
-     * 
+     *
      * @param title
      */
     public void setTitle(String title) {
@@ -95,7 +109,7 @@ public class Lesson {
 
     /**
      * Method to get hash code
-     * 
+     *
      * @return int
      */
     @Override
@@ -107,7 +121,7 @@ public class Lesson {
 
     /**
      * Equals method to compare objects
-     * 
+     *
      * @param obj
      * @return Boolean
      */
@@ -124,6 +138,7 @@ public class Lesson {
         }
         final Lesson other = (Lesson) obj;
 
+        //Since we are using GeneratedValue, one more condition
         if (this.id == null || other.id == null) {
             return false;
         }
@@ -133,7 +148,7 @@ public class Lesson {
 
     /**
      * Get the value of date
-     * 
+     *
      * @return LocalDate
      */
     public LocalDate getLessonDate() {
@@ -142,7 +157,7 @@ public class Lesson {
 
     /**
      * Set the value of date
-     * 
+     *
      * @param lessonDate
      */
     public void setLessonDate(LocalDate lessonDate) {
@@ -151,7 +166,7 @@ public class Lesson {
 
     /**
      * Get the value of type
-     * 
+     *
      * @return LessonType
      */
     public LessonType getType() {
@@ -160,7 +175,7 @@ public class Lesson {
 
     /**
      * Set the value of type
-     * 
+     *
      * @param type
      */
     public void setType(LessonType type) {
@@ -168,13 +183,21 @@ public class Lesson {
     }
 
     /**
-     * Writes Lesson fields in string
-     * 
+     * Writes Lesson fields to string
+     *
      * @return String
      */
     @Override
     public String toString() {
         return "Lesson{" + "id=" + id + ", title=" + title + ", lessonDate=" + lessonDate + ", type=" + type + '}';
+    }
+
+    public List<Student> getStudents() {
+        return student;
+    }
+
+    public void setStudents(List<Student> student) {
+        this.student = student;
     }
 
 }

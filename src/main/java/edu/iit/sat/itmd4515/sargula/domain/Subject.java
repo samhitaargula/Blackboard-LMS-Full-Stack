@@ -8,11 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -20,7 +15,7 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
-public class Teacher {
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,27 +23,9 @@ public class Teacher {
     private String name;
 
     /**
-     * OneToOne uni-directional relationship
-     *
-     */
-    @OneToOne
-    @JoinColumn(name = "TEACHER_SUBJECT")
-    private Subject subject;
-
-    /**
-     * OneToMany bi-directional relationship Assignment is owning side Teacher
-     * is inverse side
-     *
-     * This is inverse side
-     *
-     */
-    @OneToMany(mappedBy = "teacher")
-    private List<Assignment> assignments = new ArrayList<>();
-
-    /**
      * Default constructor
      */
-    public Teacher() {
+    public Subject() {
     }
 
     /**
@@ -56,7 +33,7 @@ public class Teacher {
      *
      * @param name
      */
-    public Teacher(String name) {
+    public Subject(String name) {
         this.name = name;
     }
 
@@ -87,7 +64,7 @@ public class Teacher {
         return name;
     }
 
-    /**
+     /**
      * Set the value of name
      *
      * @param name
@@ -97,60 +74,14 @@ public class Teacher {
     }
 
     /**
-     * Get the value of subject
-     *
-     * @return String
-     */
-    public Subject getSubject() {
-        return subject;
-    }
-
-    /**
-     * Set the value of subject
-     *
-     * @param subject
-     */
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    /**
-     * Get the value of assignments
-     *
-     * @return List<Assignment>
-     */
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    /**
-     * Set the value of subject
-     *
-     * @param assignments
-     */
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    /**
-     * Writes Teacher fields to string
-     *
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return "Teacher{" + "id=" + id + ", name=" + name + ", subject=" + subject + '}';
-    }
-
-    /**
      * Method to get hash code
      *
      * @return int
      */
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -171,7 +102,7 @@ public class Teacher {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Teacher other = (Teacher) obj;
+        final Subject other = (Subject) obj;
 
         //Since we are using GeneratedValue, one more condition
         if (this.id == null || other.id == null) {
@@ -180,4 +111,15 @@ public class Teacher {
 
         return Objects.equals(this.id, other.id);
     }
+
+    /**
+     * Writes Subject fields to string
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "Subject{" + "id=" + id + ", name=" + name + '}';
+    }
+
 }
