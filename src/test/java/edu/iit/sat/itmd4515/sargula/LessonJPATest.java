@@ -6,46 +6,17 @@ package edu.iit.sat.itmd4515.sargula;
 
 import edu.iit.sat.itmd4515.sargula.domain.Lesson;
 import edu.iit.sat.itmd4515.sargula.domain.LessonType;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author sargula
  */
-public class LessonJPATest {
-
-    private static EntityManagerFactory emf;
-    private EntityManager em;
-    private EntityTransaction tx;
-
-    @BeforeAll
-    public static void beforeAll() {
-        emf = Persistence.createEntityManagerFactory("itmd4515testPU");
-    }
-
-    @BeforeEach
-    public void beforeEach() throws SQLException {
-        em = emf.createEntityManager();
-        tx = em.getTransaction();
-        Lesson lesson = new Lesson("Test Data", LocalDate.of(2024, 9, 19), LessonType.INTRO);
-        tx.begin();
-        em.persist(lesson);
-        tx.commit();
-        
-        System.out.println("Before each - create lesson\t" + lesson.getTitle());
-    }
-
+public class LessonJPATest extends AbstractJPATest {
+    
     @Test
     public void createTest() throws SQLException {
         Lesson lesson = new Lesson("Lesson 1 - Introduction", LocalDate.of(2024, 9, 19), LessonType.INTRO);
@@ -103,22 +74,5 @@ public class LessonJPATest {
         em.remove(lesson);
         tx.commit();
     }
-
-    @AfterEach
-    public void afterEach() throws SQLException {
-        Lesson lesson = em.createQuery("select l from Lesson l where l.title = 'Test Data'", Lesson.class).getSingleResult();
-        
-        System.out.println("Before each - delete lesson\t" + lesson.getTitle());
-        
-        tx.begin();
-        em.remove(lesson);
-        tx.commit();
-        
-        em.close();
-    }
-
-    @AfterAll
-    public static void afterAll() {
-        emf.close();
-    }
+    
 }
