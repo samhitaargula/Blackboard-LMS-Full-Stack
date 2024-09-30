@@ -4,19 +4,24 @@
  */
 package edu.iit.sat.itmd4515.sargula.lab3;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
  * @author sargula
  */
+@Entity
 public class Staff {
     
+    @Id
     @NotNull
     @Positive
     private Integer id;
@@ -260,5 +265,27 @@ public class Staff {
     public String toString() {
         return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressId=" + addressId + ", email=" + email + ", storeId=" + storeId + ", active=" + active + ", username=" + username + ", password=" + password + ", lastUpdate=" + lastUpdate + '}';
     } 
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Staff other = (Staff) obj;
+        return Objects.equals(this.id, other.id);
+    }
     
 }
