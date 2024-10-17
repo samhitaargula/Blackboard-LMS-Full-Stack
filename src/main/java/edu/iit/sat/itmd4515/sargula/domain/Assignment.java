@@ -5,9 +5,6 @@
 package edu.iit.sat.itmd4515.sargula.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
@@ -19,19 +16,16 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
-public class Assignment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Assignment extends AbstractEntity {
 
     @FutureOrPresent
     private LocalDate date;
     private LocalTime time;
 
     /**
-     * ManyToOne bi-directional relationship Assignment is owning side Student
-     * is inverse side
+     * ManyToOne bi-directional relationship
+     * Assignment is owning side
+     * Student is inverse side
      *
      * This is owning side
      *
@@ -40,8 +34,9 @@ public class Assignment {
     private Student student;
 
     /**
-     * ManyToOne bi-directional relationship Assignment is owning side Teacher
-     * is inverse side
+     * ManyToOne bi-directional relationship
+     * Assignment is owning side
+     * Teacher is inverse side
      *
      * This is owning side
      *
@@ -50,7 +45,11 @@ public class Assignment {
     private Teacher teacher;
 
     /**
-     * ManyToOne uni-directional relationship Assignment is owning side
+     * ManyToOne uni-directional relationship
+     * Assignment is owning side
+     * Lesson is inverse side
+     *
+     * This is owning side
      *
      */
     @ManyToOne
@@ -71,24 +70,6 @@ public class Assignment {
     public Assignment(LocalDate date, LocalTime time) {
         this.date = date;
         this.time = time;
-    }
-
-    /**
-     * Get the value of id
-     *
-     * @return the value of id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Set the value of id
-     *
-     * @param id new value of id
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
