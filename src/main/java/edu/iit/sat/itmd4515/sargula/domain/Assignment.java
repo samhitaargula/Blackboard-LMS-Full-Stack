@@ -41,8 +41,8 @@ public class Assignment extends AbstractEntity {
      * This is owning side
      *
      */
-    @ManyToOne
-    private Teacher teacher;
+//    @ManyToOne
+//    private Teacher teacher;
 
     /**
      * ManyToOne uni-directional relationship Assignment is owning side Lesson
@@ -69,40 +69,36 @@ public class Assignment extends AbstractEntity {
      *
      * @param date
      * @param time
-     * @param submitted
-     * @param grade
      */
-    public Assignment(LocalDate date, LocalTime time, Boolean submitted, String grade) {
+    public Assignment(LocalDate date, LocalTime time) {
         this.date = date;
         this.time = time;
-        this.submitted = submitted;
-        this.grade = grade;
     }
     
 
-    public void uploadAssignment(Student s, Lesson l, Teacher t) {
+    public void submitAssignment(Student s, Lesson l) { //, Teacher t
         this.student = s;
-        this.teacher = t;
+//        this.teacher = t;
         this.lesson = l;
 
         if (!s.getAssignments().contains(this)) {
             s.getAssignments().add(this);
         }
-        if (!t.getAssignments().contains(this)) {
-            t.getAssignments().add(this);
-        }
+//        if (!t.getAssignments().contains(this)) {
+//            t.getAssignments().add(this);
+//        }
     }
 
     public void deleteAssignment() {
         if (this.student.getAssignments().contains(this)) {
             this.student.getAssignments().remove(this);
         }
-        if (this.teacher.getAssignments().contains(this)) {
-            this.teacher.getAssignments().remove(this);
-        }
+//        if (this.teacher.getAssignments().contains(this)) {
+//            this.teacher.getAssignments().remove(this);
+//        }
 
         this.student = null;
-        this.teacher = null;
+//        this.teacher = null;
         this.lesson = null;
     }
 
@@ -165,18 +161,18 @@ public class Assignment extends AbstractEntity {
      *
      * @return Teacher
      */
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    /**
-     * Set the value of teacher
-     *
-     * @param teacher
-     */
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
+//
+//    /**
+//     * Set the value of teacher
+//     *
+//     * @param teacher
+//     */
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
 
     /**
      * Get the value of lesson
@@ -203,7 +199,7 @@ public class Assignment extends AbstractEntity {
      */
     @Override
     public String toString() {
-        return "Assignment{" + "date=" + date + ", time=" + time + ", student=" + student + ", teacher=" + teacher + ", lesson=" + lesson + ", submitted=" + submitted + ", grade=" + grade + '}';
+        return "Assignment{" + "date=" + date + ", time=" + time + ", student=" + student + ", lesson=" + lesson + ", submitted=" + submitted + ", grade=" + grade + '}'; //", teacher=" + teacher +
     }
 
     /**

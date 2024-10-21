@@ -6,6 +6,8 @@ package edu.iit.sat.itmd4515.sargula.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -28,6 +30,19 @@ public class Teacher extends AbstractPerson {
     @OneToOne
     @JoinColumn(name = "TEACHER_SUBJECT")
     private Subject subject;
+    
+    /**
+     * ManyToMany bi-directional relationship
+     * Teacher is owning side
+     * Lesson is inverse side
+     *
+     * This is owning side
+    **/
+    @ManyToMany
+    @JoinTable(name = "TEACHER_LESSONS",
+            joinColumns = @JoinColumn(name = "TEACHER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "LESSON_ID"))
+    private List<Lesson> lessons = new ArrayList<>();
 
     /**
      * OneToMany bi-directional relationship
@@ -37,8 +52,8 @@ public class Teacher extends AbstractPerson {
      * This is inverse side
      *
      */
-    @OneToMany(mappedBy = "teacher")
-    private List<Assignment> assignments = new ArrayList<>();
+//    @OneToMany(mappedBy = "teacher")
+//    private List<Assignment> assignments = new ArrayList<>();
 
     /**
      * Default constructor
@@ -72,24 +87,42 @@ public class Teacher extends AbstractPerson {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+    
+    /**
+     * Get the value of lessons
+     *
+     * @return List<Lesson>
+     */
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    /**
+     * Set the value of lessons
+     *
+     * @param lessons
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 
     /**
      * Get the value of assignments
      *
      * @return List<Assignment>
      */
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    /**
-     * Set the value of subject
-     *
-     * @param assignments
-     */
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
+//    public List<Assignment> getAssignments() {
+//        return assignments;
+//    }
+//
+//    /**
+//     * Set the value of subject
+//     *
+//     * @param assignments
+//     */
+//    public void setAssignments(List<Assignment> assignments) {
+//        this.assignments = assignments;
+//    }
 
     /**
      * Writes Teacher fields to string
@@ -98,7 +131,7 @@ public class Teacher extends AbstractPerson {
      */
     @Override
     public String toString() {
-        return "Teacher{" + "id=" + id + ", name=" + name + ", subject=" + subject + '}';
+        return "Teacher{" + "id=" + id + ", name=" + name + ", subject=" + subject + ", lessons=" + lessons + '}';
     }
 
     /**
@@ -138,5 +171,33 @@ public class Teacher extends AbstractPerson {
         }
 
         return Objects.equals(this.id, other.id);
+    }
+    
+    /**
+     * Helper method to add lesson for teacher
+     *
+     * @param l
+     */
+    public void addTeacherLesson(Lesson l) {
+        if (!this.lessons.contains(l)) {
+            this.lessons.add(l);
+        }
+        if (!l.getTeachers().contains(this)) {
+            l.getTeachers().add(this);
+        }
+    }
+
+    /**
+     * Helper method to remove lesson for teacher
+     *
+     * @param l
+     */
+    public void removeTeacherLesson(Lesson l) {
+        if (this.lessons.contains(l)) {
+            this.lessons.remove(l);
+        }
+        if (l.getTeachers().contains(this)) {
+            l.getTeachers().remove(this);
+        }
     }
 }

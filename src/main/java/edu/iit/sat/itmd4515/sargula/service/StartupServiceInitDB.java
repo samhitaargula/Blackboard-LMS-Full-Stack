@@ -68,6 +68,12 @@ public class StartupServiceInitDB {
         Teacher t3 = new Teacher("Design Teacher");
         t3.setSubject(s3);
         
+        t1.addTeacherLesson(l1);
+        t1.addTeacherLesson(l2);
+        t1.addTeacherLesson(l3);
+        t2.addTeacherLesson(l4);
+        t3.addTeacherLesson(l5);
+        
         teacherSvc.create(t1);
         teacherSvc.create(t2);
         teacherSvc.create(t3);
@@ -87,16 +93,22 @@ public class StartupServiceInitDB {
         studentSvc.create(stu2);
         studentSvc.create(stu3);
         
-        Assignment a1 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), true, "A");
-        a1.uploadAssignment(stu1, l1, t1);
-        Assignment a2 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30), true, "B");
-        a2.uploadAssignment(stu2, l4, t2);
-        Assignment a3 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), false, "F");
-        a3.uploadAssignment(stu3, l5, t3);
+        Assignment a1 = new Assignment(LocalDate.of(2024, 12, 15), LocalTime.of(9, 30));
+        a1.submitAssignment(stu1, l1);
+        Assignment a2 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30));
+        a2.submitAssignment(stu1, l2);
+        Assignment a3 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30));
+        a3.submitAssignment(stu1, l3);
+        Assignment a4 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30));
+        a4.submitAssignment(stu2, l4);
+        Assignment a5 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30));
+        a5.submitAssignment(stu3, l5);
         
         assnSvc.create(a1);
         assnSvc.create(a2);
         assnSvc.create(a3);
+        assnSvc.create(a4);
+        assnSvc.create(a5);
         
         LOG.info("-----------------------------------------------------------------------------");
         LOG.info("Output Sample data");
@@ -111,68 +123,71 @@ public class StartupServiceInitDB {
         
         LOG.info("-----------------------------------------------------------------------------");
         LOG.info("Lessons");
-        LOG.info("-----------------------------------------------------------------------------");
         for(Lesson l : lessonSvc.readAll()){
+            LOG.info("-----------------------------------------------------------------------------");
             LOG.info(l.toString());
             
             LOG.info("\tBi-directional relationship from Lesson (inverse) to Student >>>>>>>>>");
             for( Student s : l.getStudents()){
                 LOG.info("\t" + s.toString()+ "\n");
             }
+            
+            LOG.info("\tBi-directional relationship from Lesson (inverse) to Teacher >>>>>>>>>");
+            for( Teacher t : l.getTeachers()){
+                LOG.info("\t" + t.toString()+ "\n");
+            }
         }
         
         LOG.info("-----------------------------------------------------------------------------");
         LOG.info("Teachers");
-        LOG.info("-----------------------------------------------------------------------------");
         for(Teacher t : teacherSvc.readAll()){
+            LOG.info("-----------------------------------------------------------------------------");
             LOG.info(t.toString());
             
             LOG.info("\tUnidirectional relationship from Teacher (owner) to Subject >>>>>>>>>");
             LOG.info("\t" + t.getSubject().toString() + "\n");
             
-            LOG.info("\tBi-directional relationship from Teacher (inverse) to Assignment >>>>>>>>>");
-            for( Assignment a : t.getAssignments()){
-                LOG.info("\t" + a.toString() + "\n");
+            LOG.info("\tBi-directional relationship from Teacher (inverse) to Lesson >>>>>>>>>");
+            for( Lesson l : t.getLessons()){
+                LOG.info("\t" + l.toString());
             }
-
-            LOG.info("-----------------------------------------------------------------------------");
+            LOG.info("\n");
         }
         
         LOG.info("-----------------------------------------------------------------------------");
         LOG.info("Students");
-        LOG.info("-----------------------------------------------------------------------------");
         for(Student s : studentSvc.readAll()){
+            LOG.info("-----------------------------------------------------------------------------");
             LOG.info(s.toString());
             
             LOG.info("\tBi-directional relationship from Student (owner) to Lesson >>>>>>>>>");
             for( Lesson l : s.getLessons()){
-                LOG.info("\t" + l.toString() + "\n");
+                LOG.info("\t" + l.toString());
             }
+            
+            LOG.info("\n");
             
             LOG.info("\tBi-directional relationship from Student (inverse) to Assignment >>>>>>>>>");
             for( Assignment a : s.getAssignments()){
-                LOG.info("\t" + a.toString() + "\n");
+                LOG.info("\t" + a.toString());
             }
             
-            LOG.info("-----------------------------------------------------------------------------");
+            LOG.info("\n");
+            
         }
         
         LOG.info("-----------------------------------------------------------------------------");
         LOG.info("Assignments");
-        LOG.info("-----------------------------------------------------------------------------");
         for(Assignment a : assnSvc.readAll()){
+            LOG.info("-----------------------------------------------------------------------------");
             LOG.info(a.toString());
             
             LOG.info("\tUnidirectional relationship from Assignment (owner) to Lesson >>>>>>>>>");
             LOG.info("\t" + a.getLesson().toString() + "\n");
             
-            LOG.info("\tBi-directional relationship from Assignment (owner) to Teacher >>>>>>>>>");
-            LOG.info("\t" + a.getTeacher().toString() + "\n");
-            
             LOG.info("\tBi-directional relationship from Assignment (owner) to Student >>>>>>>>>");
             LOG.info("\t" + a.getStudent().toString() + "\n");
-
-            LOG.info("-----------------------------------------------------------------------------");
         }
+        LOG.info("-----------------------------------------------------------------------------");
     }
 }

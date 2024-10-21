@@ -46,6 +46,17 @@ public class Lesson extends AbstractEntity {
      */
     @ManyToMany(mappedBy = "lessons")
     private List<Student> student = new ArrayList<>();
+    
+    /**
+     * ManyToMany bi-directional relationship
+     * Student is owning side
+     * Lesson is inverse side
+     *
+     * This is inverse side
+     *
+     */
+    @ManyToMany(mappedBy = "lessons")
+    private List<Teacher> teacher = new ArrayList<>();
 
     /**
      * Default constructor
@@ -169,12 +180,36 @@ public class Lesson extends AbstractEntity {
         return "Lesson{" + "id=" + id + ", title=" + title + ", lessonDate=" + lessonDate + ", type=" + type + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Student> getStudents() {
         return student;
     }
 
+    /**
+     *
+     * @param student
+     */
     public void setStudents(List<Student> student) {
         this.student = student;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Teacher> getTeachers() {
+        return teacher;
+    }
+
+    /**
+     *
+     * @param teacher
+     */
+    public void setTeachers(List<Teacher> teacher) {
+        this.teacher = teacher;
     }
 
 }
