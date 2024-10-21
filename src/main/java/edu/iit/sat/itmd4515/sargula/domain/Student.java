@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
+@NamedQuery(name = "Student.readAll", query = "select s from Student s")
 public class Student extends AbstractPerson {
 
     @NotBlank
@@ -135,7 +137,7 @@ public class Student extends AbstractPerson {
      *
      * @return List<Assignment>
      */
-    public List<Assignment> getAssignment() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
 
@@ -144,7 +146,7 @@ public class Student extends AbstractPerson {
      *
      * @param assignments
      */
-    public void setAssignment(List<Assignment> assignments) {
+    public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }
 
@@ -155,7 +157,7 @@ public class Student extends AbstractPerson {
      */
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", name=" + name + ", email=" + email + ", lessons=" + lessons + ", assignments=" + assignments + '}';
+        return "Student{" + "id=" + id + ", name=" + name + ", email=" + email + ", lessons=" + lessons + '}';
     }
 
     /**

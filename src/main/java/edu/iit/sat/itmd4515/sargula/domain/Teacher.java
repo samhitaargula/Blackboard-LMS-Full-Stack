@@ -6,6 +6,7 @@ package edu.iit.sat.itmd4515.sargula.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
+@NamedQuery(name = "Teacher.readAll", query = "select t from Teacher t")
 public class Teacher extends AbstractPerson {
 
     /**

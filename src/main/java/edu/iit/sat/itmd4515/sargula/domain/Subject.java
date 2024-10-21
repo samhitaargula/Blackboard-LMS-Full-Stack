@@ -5,6 +5,7 @@
 package edu.iit.sat.itmd4515.sargula.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,7 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
+@NamedQuery(name = "Subject.readAll", query = "select s from Subject s")
 public class Subject extends AbstractEntity {
     
     private String name;

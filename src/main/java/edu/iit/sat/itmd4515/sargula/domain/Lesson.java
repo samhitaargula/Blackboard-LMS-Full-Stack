@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
@@ -23,6 +24,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "lesson")
+@NamedQuery(name = "Lesson.readAll", query = "select l from Lesson l")
 public class Lesson extends AbstractEntity {
 
     @NotBlank

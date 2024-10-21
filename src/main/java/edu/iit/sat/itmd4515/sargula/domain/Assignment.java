@@ -6,6 +6,7 @@ package edu.iit.sat.itmd4515.sargula.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,6 +17,7 @@ import java.util.Objects;
  * @author sargula
  */
 @Entity
+@NamedQuery(name = "Assignment.readAll", query = "select a from Assignment a")
 public class Assignment extends AbstractEntity {
 
     @FutureOrPresent
@@ -23,9 +25,8 @@ public class Assignment extends AbstractEntity {
     private LocalTime time;
 
     /**
-     * ManyToOne bi-directional relationship
-     * Assignment is owning side
-     * Student is inverse side
+     * ManyToOne bi-directional relationship Assignment is owning side Student
+     * is inverse side
      *
      * This is owning side
      *
@@ -34,9 +35,8 @@ public class Assignment extends AbstractEntity {
     private Student student;
 
     /**
-     * ManyToOne bi-directional relationship
-     * Assignment is owning side
-     * Teacher is inverse side
+     * ManyToOne bi-directional relationship Assignment is owning side Teacher
+     * is inverse side
      *
      * This is owning side
      *
@@ -45,15 +45,18 @@ public class Assignment extends AbstractEntity {
     private Teacher teacher;
 
     /**
-     * ManyToOne uni-directional relationship
-     * Assignment is owning side
-     * Lesson is inverse side
+     * ManyToOne uni-directional relationship Assignment is owning side Lesson
+     * is inverse side
      *
      * This is owning side
      *
      */
     @ManyToOne
     private Lesson lesson;
+
+    private Boolean submitted;
+
+    private String grade;
 
     /**
      * Default constructor
@@ -66,10 +69,41 @@ public class Assignment extends AbstractEntity {
      *
      * @param date
      * @param time
+     * @param submitted
+     * @param grade
      */
-    public Assignment(LocalDate date, LocalTime time) {
+    public Assignment(LocalDate date, LocalTime time, Boolean submitted, String grade) {
         this.date = date;
         this.time = time;
+        this.submitted = submitted;
+        this.grade = grade;
+    }
+    
+
+    public void uploadAssignment(Student s, Lesson l, Teacher t) {
+        this.student = s;
+        this.teacher = t;
+        this.lesson = l;
+
+        if (!s.getAssignments().contains(this)) {
+            s.getAssignments().add(this);
+        }
+        if (!t.getAssignments().contains(this)) {
+            t.getAssignments().add(this);
+        }
+    }
+
+    public void deleteAssignment() {
+        if (this.student.getAssignments().contains(this)) {
+            this.student.getAssignments().remove(this);
+        }
+        if (this.teacher.getAssignments().contains(this)) {
+            this.teacher.getAssignments().remove(this);
+        }
+
+        this.student = null;
+        this.teacher = null;
+        this.lesson = null;
     }
 
     /**
@@ -169,7 +203,7 @@ public class Assignment extends AbstractEntity {
      */
     @Override
     public String toString() {
-        return "Assignment{" + "id=" + id + ", date=" + date + ", time=" + time + ", student=" + student + ", teacher=" + teacher + ", lesson=" + lesson + '}';
+        return "Assignment{" + "date=" + date + ", time=" + time + ", student=" + student + ", teacher=" + teacher + ", lesson=" + lesson + ", submitted=" + submitted + ", grade=" + grade + '}';
     }
 
     /**
@@ -210,4 +244,21 @@ public class Assignment extends AbstractEntity {
 
         return Objects.equals(this.id, other.id);
     }
+
+    public Boolean isSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(Boolean submitted) {
+        this.submitted = submitted;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
 }
