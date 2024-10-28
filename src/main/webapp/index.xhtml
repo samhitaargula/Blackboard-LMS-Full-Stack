@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="jakarta.faces.passthrough"
+      xmlns:f="jakarta.faces.core">
+
+    <h:head>
+        <title>Create Lesson</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!--Instructor Example-->
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Lesson Name: " for="lessonName"/>
+                    <h:inputText id="lessonName" value="#{lessonController.lesson.title}"/>
+                    <h:message for="lessonName" errorStyle="color: red"/>
+                </h:panelGroup>
+            </p>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Lesson Date: " for="lessonDate"/>
+                    <h:inputText p:type="date" id="lessonDate" value="#{lessonController.lesson.lessonDate}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                    <h:message for="lessonDate" errorStyle="color: red"/>
+                </h:panelGroup>
+            </p>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Lesson Type " for="lessonType"/>
+                    <h:selectOneMenu id="lessonType" value="#{lessonController.lesson.type}">
+                        <f:selectItems value="#{lessonService.allLessonTypes}"
+                                       var="lessonType"
+                                       itemLabel="#{type.label}"
+                                       itemValue="#{type}" />
+                    </h:selectOneMenu>
+                    <h:message for="lessonType" errorStyle="color: red"/>
+                </h:panelGroup>
+            </p>
+
+            <h:commandButton value="Create Lesson" action="#{lessonController.saveLesson()}"/>
+
+        </h:form>
+    </h:body>
+</html>
