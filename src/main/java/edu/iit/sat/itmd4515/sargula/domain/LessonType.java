@@ -9,5 +9,17 @@ package edu.iit.sat.itmd4515.sargula.domain;
  * @author sargula
  */
 public enum LessonType {
-    INTRO,MEDIUM,ADVANCED;
+    INTRO("Intro"),
+    MEDIUM("Medium"),
+    ADVANCED("Advanced");
+    
+    private String label;
+
+    private LessonType(String label) {
+        this.label = label;
+    }
+    
+    private String getLabel(){
+        return label;
+    }
 }
