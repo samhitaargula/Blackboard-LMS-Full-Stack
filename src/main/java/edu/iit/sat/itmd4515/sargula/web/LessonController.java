@@ -40,7 +40,7 @@ public class LessonController {
         lessonSvc.create(lesson);
         LOG.info("Inside LessonController.saveLesson after call to service " + lesson.toString());
         
-        return "confirmation.xhtml";
+        return "createLessonConfirmation.xhtml";
     }
 
     public Lesson getLesson() {
