@@ -8,6 +8,8 @@
       <class>edu.iit.sat.itmd4515.sargula.domain.Student</class>
       <class>edu.iit.sat.itmd4515.sargula.domain.Teacher</class>
       <class>edu.iit.sat.itmd4515.sargula.domain.Subject</class>
+      <class>edu.iit.sat.itmd4515.sargula.security.User</class>
+      <class>edu.iit.sat.itmd4515.sargula.security.Group</class>
       
     <properties>
       <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
