@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.sargula.domain;
 
+import edu.iit.sat.itmd4515.sargula.security.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -30,14 +31,14 @@ public class Teacher extends AbstractPerson {
     @OneToOne
     @JoinColumn(name = "TEACHER_SUBJECT")
     private Subject subject;
-    
+
     /**
-     * ManyToMany bi-directional relationship
-     * Teacher is owning side
-     * Lesson is inverse side
+     * ManyToMany bi-directional relationship Teacher is owning side Lesson is
+     * inverse side
      *
      * This is owning side
-    **/
+    *
+     */
     @ManyToMany
     @JoinTable(name = "TEACHER_LESSONS",
             joinColumns = @JoinColumn(name = "TEACHER_ID"),
@@ -45,15 +46,17 @@ public class Teacher extends AbstractPerson {
     private List<Lesson> lessons = new ArrayList<>();
 
     /**
-     * OneToMany bi-directional relationship
-     * Assignment is owning side
-     * Teacher is inverse side
+     * OneToMany bi-directional relationship Assignment is owning side Teacher
+     * is inverse side
      *
      * This is inverse side
      *
      */
 //    @OneToMany(mappedBy = "teacher")
 //    private List<Assignment> assignments = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "USERNAME")
+    private User user;
 
     /**
      * Default constructor
@@ -87,7 +90,7 @@ public class Teacher extends AbstractPerson {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
-    
+
     /**
      * Get the value of lessons
      *
@@ -123,7 +126,6 @@ public class Teacher extends AbstractPerson {
 //    public void setAssignments(List<Assignment> assignments) {
 //        this.assignments = assignments;
 //    }
-
     /**
      * Writes Teacher fields to string
      *
@@ -172,7 +174,7 @@ public class Teacher extends AbstractPerson {
 
         return Objects.equals(this.id, other.id);
     }
-    
+
     /**
      * Helper method to add lesson for teacher
      *
@@ -200,4 +202,13 @@ public class Teacher extends AbstractPerson {
             l.getTeachers().remove(this);
         }
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

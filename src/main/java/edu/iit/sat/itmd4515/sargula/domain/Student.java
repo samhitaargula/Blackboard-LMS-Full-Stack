@@ -4,12 +4,14 @@
  */
 package edu.iit.sat.itmd4515.sargula.domain;
 
+import edu.iit.sat.itmd4515.sargula.security.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +29,12 @@ public class Student extends AbstractPerson {
     private String email;
 
     /**
-     * ManyToMany bi-directional relationship
-     * Student is owning side
-     * Lesson is inverse side
+     * ManyToMany bi-directional relationship Student is owning side Lesson is
+     * inverse side
      *
      * This is owning side
-    **/
+     *
+     */
     @ManyToMany
     @JoinTable(name = "STUDENT_LESSONS",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
@@ -40,14 +42,18 @@ public class Student extends AbstractPerson {
     private List<Lesson> lessons = new ArrayList<>();
 
     /**
-     * OneToMany bi-directional relationship
-     * Assignment is owning side
-     * Student is inverse side
+     * OneToMany bi-directional relationship Assignment is owning side Student
+     * is inverse side
      *
      * This is inverse side
-    **/
+     *
+     */
     @OneToMany(mappedBy = "student")
     private List<Assignment> assignments = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "USERNAME")
+    private User user;
 
     /**
      * Default constructor
@@ -65,10 +71,10 @@ public class Student extends AbstractPerson {
         this.name = name;
         this.email = email;
     }
-    
+
     /**
      * Helper method to add lesson for student
-     * 
+     *
      * @param l
      */
     public void addStudentLesson(Lesson l) {
@@ -82,7 +88,7 @@ public class Student extends AbstractPerson {
 
     /**
      * Helper method to remove lesson for student
-     * 
+     *
      * @param l
      */
     public void removeStudentLesson(Lesson l) {
@@ -93,8 +99,6 @@ public class Student extends AbstractPerson {
             l.getStudents().remove(this);
         }
     }
-
-
 
     /**
      * Get the value of email
@@ -198,4 +202,13 @@ public class Student extends AbstractPerson {
 
         return Objects.equals(this.id, other.id);
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
