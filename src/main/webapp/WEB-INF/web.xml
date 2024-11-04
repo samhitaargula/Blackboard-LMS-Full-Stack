@@ -10,6 +10,40 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Only Content</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/welcome.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN_ROLE</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Teacher Only Content</web-resource-name>
+            <url-pattern>/teacher/*</url-pattern>
+            <url-pattern>/welcome.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>TEACHER_ROLE</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Student Only Content</web-resource-name>
+            <url-pattern>/student/*</url-pattern>
+            <url-pattern>/welcome.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>STUDENT_ROLE</role-name>
+        </auth-constraint>
+    </security-constraint>
+
 </web-app>
