@@ -70,6 +70,7 @@ public class StartupServiceInitDB {
         
         User teacher2 = new User("teacher2", "teacher2");
         teacher2.addGroup(teacherGroup);
+        teacher2.addGroup(studentGroup);
 
         User student1 = new User("student1", "student1");
         student1.addGroup(studentGroup);
@@ -109,8 +110,10 @@ public class StartupServiceInitDB {
 
         Teacher t1 = new Teacher("Java Teacher");
         t1.setSubject(s1);
+        t1.setUser(teacher1);
         Teacher t2 = new Teacher("Algorithms Teacher");
         t2.setSubject(s2);
+        t2.setUser(teacher2);
         Teacher t3 = new Teacher("Design Teacher");
         t3.setSubject(s3);
 
@@ -132,14 +135,20 @@ public class StartupServiceInitDB {
 
         Student stu2 = new Student("Algorithms Student", "stu2@mail.com");
         stu2.addStudentLesson(l4);
-        stu2.setUser(student2);
 
         Student stu3 = new Student("Design Student", "stu3@mail.com");
         stu3.addStudentLesson(l5);
+        stu3.setUser(student2);
+        
+        //Design student who is also TA for Algo
+        Student stu4 = new Student("Teaching Assistant Student", "stu4@mail.com");
+        stu4.addStudentLesson(l5);
+        stu4.setUser(teacher2);
 
         studentSvc.create(stu1);
         studentSvc.create(stu2);
         studentSvc.create(stu3);
+        studentSvc.create(stu4);
 
         Assignment a1 = new Assignment(LocalDate.of(2024, 12, 15), LocalTime.of(9, 30));
         a1.submitAssignment(stu1, l1);
