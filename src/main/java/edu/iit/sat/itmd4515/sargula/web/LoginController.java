@@ -50,13 +50,25 @@ public class LoginController {
         LOG.info("Inside LoginController.postConstruct()");
         user = new User();
     }
-
+    
     /**
      *
      * @return
      */
-    public String getAuthenticatedUsername() {
+    public String getAuthenticatedUsername(){
         return securityContext.getCallerPrincipal().getName();
+    }
+    
+    public boolean isTeacher(){
+        return securityContext.isCallerInRole("TEACHER_ROLE");
+    }
+
+    public boolean isStudent(){
+        return securityContext.isCallerInRole("STUDENT_ROLE");
+    }
+
+    public boolean isAdmin(){
+        return securityContext.isCallerInRole("ADMIN_ROLE");
     }
 
     /**
