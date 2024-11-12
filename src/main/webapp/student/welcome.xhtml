@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
                 template="../WEB-INF/templates/authNtemplate.xhtml"
-                xmlns:h="jakarta.faces.html">
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
 
     <ui:define name="title">
         Blackboard Student. Your student username is #{loginController.authenticatedUsername}
@@ -11,10 +12,34 @@
 
     <ui:define name="content">
         Student Content
-        
-        <ul>
-            <li><h:link outcome="/welcome.xhtml">Home</h:link></li>
-        </ul>
+
+        <h:dataTable 
+            styleClass="table table-striped table-hover"
+            value="#{studentWelcomeController.student.lessons}" var="lesson">
+            <h:column>
+                <f:facet name="header">Lesson Id</f:facet>
+                <h:outputText value="#{lesson.id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Lesson Name</f:facet>
+                <h:outputText value="#{lesson.title}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Lesson Date</f:facet>
+                <h:outputText value="#{lesson.lessonDate}">
+                    <f:convertDateTime type="localDate" dateStyle="long"/>
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Lesson Type</f:facet>
+                <h:outputText value="#{lesson.type}"/>
+            </h:column>
+
+        </h:dataTable>
+
     </ui:define>
 
 </ui:composition>

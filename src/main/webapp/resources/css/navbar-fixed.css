@@ -1,0 +1,10 @@
+/* 
+    Created on : Nov 11, 2024, 4:05:18 PM
+    Author     : sargula
+*/
+
+/* Show it is fixed to the top */
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
