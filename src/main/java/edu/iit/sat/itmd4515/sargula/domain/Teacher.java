@@ -22,6 +22,7 @@ import java.util.Objects;
  */
 @Entity
 @NamedQuery(name = "Teacher.readAll", query = "select t from Teacher t")
+@NamedQuery(name = "Teacher.findByUsername", query = "select t from Teacher t where t.user.username = :uname")
 public class Teacher extends AbstractPerson {
 
     /**

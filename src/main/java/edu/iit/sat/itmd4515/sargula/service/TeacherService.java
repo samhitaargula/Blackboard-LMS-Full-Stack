@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.sargula.service;
 
+import edu.iit.sat.itmd4515.sargula.domain.Lesson;
 import edu.iit.sat.itmd4515.sargula.domain.Teacher;
 import jakarta.ejb.Stateless;
 import java.util.List;
@@ -21,5 +22,17 @@ public class TeacherService extends AbstractService<Teacher>{
     
     public List<Teacher> readAll(){
         return super.readAll("Teacher.readAll");
+    }
+    
+    public Teacher findByUsername(String uname){
+        return em.createNamedQuery("Teacher.findByUsername", Teacher.class).setParameter("uname", uname).getSingleResult();
+    }
+    
+    public void createLessonForAuthenticatedTeacher(Lesson lesson, Teacher student) {
+        em.persist(lesson);
+        
+        Teacher teacherRef = em.getReference(Teacher.class, student.getId());
+        teacherRef.addTeacherLesson(lesson);
+        em.merge(teacherRef);
     }
 }
