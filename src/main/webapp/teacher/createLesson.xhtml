@@ -14,7 +14,7 @@
             <p>
                 <h:panelGroup layout="block">
                     <h:outputLabel value="Lesson Name: " for="lessonName"/>
-                    <h:inputText id="lessonName" value="#{lessonController.lesson.title}"/>
+                    <h:inputText id="lessonName" value="#{teacherCreateLessonController.lesson.title}"/>
                     <h:message for="lessonName" errorStyle="color: red"/>
                 </h:panelGroup>
             </p>
@@ -22,7 +22,7 @@
             <p>
                 <h:panelGroup layout="block">
                     <h:outputLabel value="Lesson Date: " for="lessonDate"/>
-                    <h:inputText p:type="date" id="lessonDate" value="#{lessonController.lesson.lessonDate}">
+                    <h:inputText p:type="date" id="lessonDate" value="#{teacherCreateLessonController.lesson.lessonDate}">
                         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
                     </h:inputText>
                     <h:message for="lessonDate" errorStyle="color: red"/>
@@ -32,7 +32,7 @@
             <p>
                 <h:panelGroup layout="block">
                     <h:outputLabel value="Lesson Type " for="lessonType"/>
-                    <h:selectOneMenu id="lessonType" value="#{lessonController.lesson.type}">
+                    <h:selectOneMenu id="lessonType" value="#{teacherCreateLessonController.lesson.type}">
                         <f:selectItems value="#{lessonService.allLessonTypes}"
                                        var="lessonType"
                                        itemLabel="#{type.label}"
@@ -42,7 +42,7 @@
                 </h:panelGroup>
             </p>
 
-            <h:commandButton value="Create Lesson" action="#{lessonController.saveLesson()}"/>
+            <h:commandButton value="Create Lesson" action="#{teacherCreateLessonController.saveLesson()}"/>
 
         </h:form>
     </h:body>

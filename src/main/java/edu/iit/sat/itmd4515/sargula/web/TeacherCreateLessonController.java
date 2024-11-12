@@ -5,10 +5,11 @@
 package edu.iit.sat.itmd4515.sargula.web;
 
 import edu.iit.sat.itmd4515.sargula.domain.Lesson;
-import edu.iit.sat.itmd4515.sargula.service.LessonService;
+import edu.iit.sat.itmd4515.sargula.service.TeacherService;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.logging.Logger;
 
@@ -18,15 +19,17 @@ import java.util.logging.Logger;
  */
 @Named
 @RequestScoped
-public class LessonController {
+public class TeacherCreateLessonController {
 
-    @EJB LessonService lessonSvc;
+    //@EJB LessonService lessonSvc;
+    @EJB TeacherService teacherSvc;
+    @Inject TeacherWelcomeController twc;
     
-    private static final Logger LOG = Logger.getLogger(LessonController.class.getName());
+    private static final Logger LOG = Logger.getLogger(TeacherCreateLessonController.class.getName());
 
     private Lesson lesson;
 
-    public LessonController() {
+    public TeacherCreateLessonController() {
     }
 
     @PostConstruct
@@ -37,7 +40,8 @@ public class LessonController {
     
     public String saveLesson(){
         LOG.info("Inside LessonController.saveLesson with " + lesson.toString());
-        lessonSvc.create(lesson);
+        //lessonSvc.create(lesson);
+        teacherSvc.createLessonForAuthenticatedTeacher(lesson, twc.getTeacher());
         LOG.info("Inside LessonController.saveLesson after call to service " + lesson.toString());
         
         return "createLessonConfirmation.xhtml";
