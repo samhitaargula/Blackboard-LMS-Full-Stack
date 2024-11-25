@@ -45,7 +45,18 @@
                 </ui:repeat>
             </h:column>
 
+            <h:column>
+                <h:form>
+                    <h:commandButton value="details" action="#{teacherLessonController.displayLessonDetailsPage(lesson)}"/>
+                    <h:commandButton value="edit" action="#{teacherLessonController.displayEditLessonPage(lesson)}"/>
+                    <h:commandButton value="delete" action="#{teacherLessonController.displayDeleteLessonPage(lesson)}"/>
+                </h:form>
+            </h:column>
         </h:dataTable>
+        
+        <h:form>
+            <h:commandButton class="btn btn-lg btn-primary" value="Add New Lesson" action="#{teacherLessonController.displayAddLessonPage()}" />
+        </h:form>
     </ui:define>
 
 </ui:composition>
