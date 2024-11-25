@@ -150,15 +150,15 @@ public class StartupServiceInitDB {
         studentSvc.create(stu3);
         studentSvc.create(stu4);
 
-        Assignment a1 = new Assignment(LocalDate.of(2024, 12, 15), LocalTime.of(9, 30));
+        Assignment a1 = new Assignment(LocalDate.of(2024, 12, 15), LocalTime.of(9, 30), true, 'A');
         a1.submitAssignment(stu1, l1);
-        Assignment a2 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30));
+        Assignment a2 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), true, 'B');
         a2.submitAssignment(stu1, l2);
-        Assignment a3 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30));
+        Assignment a3 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30), true, 'C');
         a3.submitAssignment(stu1, l3);
-        Assignment a4 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30));
+        Assignment a4 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30), true, 'D');
         a4.submitAssignment(stu2, l4);
-        Assignment a5 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30));
+        Assignment a5 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), false, 'F');
         a5.submitAssignment(stu3, l5);
 
         assnSvc.create(a1);

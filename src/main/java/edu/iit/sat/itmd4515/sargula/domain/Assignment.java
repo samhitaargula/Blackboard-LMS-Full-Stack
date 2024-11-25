@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 @Entity
 @NamedQuery(name = "Assignment.readAll", query = "select a from Assignment a")
+@NamedQuery(name = "Assignment.findAssignmentsForLesson", query="select a from Assignment a where a.lesson.id = :lessonid")
 public class Assignment extends AbstractEntity {
 
     @FutureOrPresent
@@ -56,7 +57,7 @@ public class Assignment extends AbstractEntity {
 
     private Boolean submitted;
 
-    private String grade;
+    private char grade;
 
     /**
      * Default constructor
@@ -69,10 +70,14 @@ public class Assignment extends AbstractEntity {
      *
      * @param date
      * @param time
+     * @param submitted
+     * @param grade
      */
-    public Assignment(LocalDate date, LocalTime time) {
+    public Assignment(LocalDate date, LocalTime time, Boolean submitted, char grade) {
         this.date = date;
         this.time = time;
+        this.submitted = submitted;
+        this.grade = grade;
     }
     
 
@@ -249,11 +254,11 @@ public class Assignment extends AbstractEntity {
         this.submitted = submitted;
     }
 
-    public String getGrade() {
+    public char getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(char grade) {
         this.grade = grade;
     }
 
