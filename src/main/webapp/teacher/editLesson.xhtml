@@ -9,11 +9,11 @@
                 xmlns:ezcomp="jakarta.faces.composite/ezcomp">
 
     <ui:define name="title">
-        Create Lesson
+        Edit Lesson
     </ui:define>
 
     <ui:define name="content">
-        <ezcomp:lesson operation="create" formAction="#{teacherLessonController.saveLesson()}"/>
+        <ezcomp:lesson operation="update" formAction="#{teacherLessonController.editLesson()}"/>
     </ui:define>
 
 </ui:composition>
