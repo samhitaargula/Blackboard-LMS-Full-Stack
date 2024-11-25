@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Version;
 import java.time.LocalDateTime;
 
@@ -28,10 +29,18 @@ public class AbstractEntity {
 
     private LocalDateTime createdTimestamp;
 
+    private LocalDateTime updatedTimestamp;
+    
     @PrePersist
     private void initCreatedTimestamp() {
         createdTimestamp = LocalDateTime.now();
     }
+    
+    @PreUpdate
+    private void initUpdatedTimestamp() {
+        updatedTimestamp = LocalDateTime.now();
+    }
+
 
     /**
      * Default constructor
@@ -91,6 +100,12 @@ public class AbstractEntity {
      */
     public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
+    }
+    public LocalDateTime getUpdatedTimestamp() {
+        return updatedTimestamp;
+    }
+    public void setUpdatedTimestamp(LocalDateTime updatedTimestamp) {
+        this.updatedTimestamp = updatedTimestamp;
     }
 
 }
