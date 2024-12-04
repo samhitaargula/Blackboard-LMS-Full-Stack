@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="jakarta.faces.passthrough"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <cc:interface>
+        <cc:attribute name="assignment" type="edu.iit.sat.itmd4515.sargula.domain.Assignment" required="true" />
+        <cc:attribute name="formAction" required="false" method-signature="java.lang.String methodName()" />
+        <cc:attribute name="operation" required="true" shortDescription="One of create, read, update, or delete" type="java.lang.String" />
+        <cc:attribute name="admin" type="java.lang.Boolean" required="false" default="false" />
+        <cc:attribute name="student" type="java.lang.Boolean" required="false" default="false" />
+    </cc:interface>
+
+    <cc:implementation>
+        <h:form>
+            <ui:fragment rendered="#{cc.attrs.student}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Student ID: #{cc.attrs.assignment.student.id} " for="studentId" />
+                        <h:inputHidden id="studentId" value="#{cc.attrs.assignment.student.id}"/>
+                        <h:message for="studentId" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+            
+            <ui:fragment rendered="#{not cc.attrs.admin and not(cc.attrs.student and cc.attrs.operation.equalsIgnoreCase('create'))}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Teacher ID: #{cc.attrs.assignment.lesson.teacher.id} " for="teacherId" />
+                        <h:inputHidden id="teacherId" value="#{cc.attrs.assignment.lesson.teacher.id}"/>
+                        <h:message for="teacherId" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+            
+            <ui:fragment rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Assignment ID: #{cc.attrs.assignment.id}" for="assignmentId"/>
+                        <h:inputHidden id="assignmentId" value="#{cc.attrs.assignment.id}"/>
+                        <h:message for="assignmentId" errorStyle="color: red"/>
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Assignment Title: " for="assignmentTitle"/>
+                    <h:inputText disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                                 readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                                 id="assignmentTitle" 
+                                 value="#{cc.attrs.assignment.title}"/>
+                    <h:message for="assignmentTitle" errorStyle="color: red"/>
+                </h:panelGroup>
+            </p>
+
+<!--            <ui:fragment rendered="#{cc.attrs.admin}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Teacher: " for="adminTeacher"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="adminTeacher"
+                            converter="teacherConverter"
+                            value="#{cc.attrs.assignment.lesson.teacher}">
+                            <f:selectItems value="#{teacherService.readAll()}"
+                                           var="teacher"
+                                           itemLabel="#{teacher.name}"
+                                           itemValue="#{teacher}" />
+                        </h:selectOneMenu>
+                        <h:message for="adminTeacher" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>-->
+
+            <ui:fragment rendered="#{cc.attrs.admin}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Lesson: " for="adminLesson"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="adminLesson"
+                            converter="lessonConverter"
+                            value="#{cc.attrs.assignment.lesson}">
+                            <f:selectItems value="#{lessonService.readAll()}"
+                                           var="lesson"
+                                           itemLabel="#{lesson.title}"
+                                           itemValue="#{lesson}" />
+                        </h:selectOneMenu>
+                        <h:message for="adminLesson" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{cc.attrs.student}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Lesson: " for="studentLesson"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="studentLesson"
+                            converter="lessonConverter"
+                            value="#{cc.attrs.assignment.lesson}">
+                            <f:selectItems value="#{cc.attrs.assignment.student.lessons}"
+                                           var="lesson"
+                                           itemLabel="#{lesson.title}"
+                                           itemValue="#{lesson}" />
+                        </h:selectOneMenu>
+                        <h:message for="studentLesson" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{not cc.attrs.admin and not cc.attrs.student}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Lesson: " for="teacherLesson"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="teacherLesson"
+                            converter="lessonConverter"
+                            value="#{cc.attrs.assignment.lesson}">
+                            <f:selectItems value="#{cc.attrs.assignment.lesson.teacher.lessons}"
+                                           var="lesson"
+                                           itemLabel="#{lesson.title}"
+                                           itemValue="#{lesson}" />
+                        </h:selectOneMenu>
+                        <h:message for="teacherLesson" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Submission Date: " for="assignmentDate"/>
+                        <h:inputText 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            p:type="date" 
+                            id="assignmentDate" 
+                            value="#{cc.attrs.assignment.date}">
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                        </h:inputText>
+                        <h:message for="assignmentDate" errorStyle="color: red"/>
+                    </h:panelGroup>
+                </p>
+
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Submission Time: " for="assignmentTime"/>
+                        <h:inputText 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            p:type="time" 
+                            id="assignmentTime" 
+                            value="#{cc.attrs.assignment.time}">
+                            <f:convertDateTime type="localTime" pattern="HH:mm" />
+                        </h:inputText>
+                        <h:message for="assignmentTime" errorStyle="color: red"/>
+                    </h:panelGroup>
+                </p>
+            
+            <ui:fragment rendered="#{not cc.attrs.student}">
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Student: " for="student"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="student"
+                            converter="studentConverter"
+                            value="#{cc.attrs.assignment.student}">
+                            <f:selectItems value="#{studentService.readAll()}"
+                                           var="student"
+                                           itemLabel="#{student.name}"
+                                           itemValue="#{student}" />
+                        </h:selectOneMenu>
+                        <h:message for="teacher" errorStyle="color: red" />
+                    </h:panelGroup>
+                </p>
+
+                <p>
+                    <h:panelGroup layout="block">
+                        <h:outputLabel value="Grade: " for="grade"/>
+                        <h:selectOneMenu 
+                            disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                            id="grade" 
+                            value="#{cc.attrs.assignment.grade}">
+                            <f:selectItem itemValue="A" itemLabel="A" />
+                            <f:selectItem itemValue="B" itemLabel="B" />
+                            <f:selectItem itemValue="C" itemLabel="C" />
+                            <f:selectItem itemValue="D" itemLabel="D" />
+                            <f:selectItem itemValue="F" itemLabel="F" />
+                        </h:selectOneMenu>
+                        <h:message for="grade" errorStyle="color: red"/>
+                    </h:panelGroup>
+                </p>
+            </ui:fragment>
+
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}" value="Submit" action="#{cc.attrs.formAction}"/>
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('update')}" value="Edit" action="#{cc.attrs.formAction}"/>
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}" value="Delete" action="#{cc.attrs.formAction}"/>
+        </h:form>
+    </cc:implementation>
+</html>
