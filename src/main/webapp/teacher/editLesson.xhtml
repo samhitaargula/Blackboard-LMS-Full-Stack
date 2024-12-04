@@ -13,7 +13,9 @@
     </ui:define>
 
     <ui:define name="content">
-        <ezcomp:lesson operation="update" formAction="#{teacherLessonController.editLesson()}"/>
+        <ezcomp:lesson lesson="#{teacherLessonController.lesson}"
+                       operation="update"
+                       formAction="#{teacherLessonController.editLesson()}"/>
     </ui:define>
 
 </ui:composition>

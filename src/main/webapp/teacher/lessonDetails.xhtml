@@ -12,7 +12,8 @@
     </ui:define>
 
     <ui:define name="content">
-        <ezcomp:lesson operation="read"/>
+        <ezcomp:lesson lesson="#{teacherLessonController.lesson}"
+                       operation="read"/>
     </ui:define>
 
 </ui:composition>

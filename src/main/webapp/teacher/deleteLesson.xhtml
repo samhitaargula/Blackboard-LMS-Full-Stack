@@ -12,7 +12,9 @@
     </ui:define>
 
     <ui:define name="content">
-        <ezcomp:lesson operation="delete" formAction="#{teacherLessonController.deleteLesson()}"/>
+        <ezcomp:lesson lesson="#{teacherLessonController.lesson}"
+                       operation="delete"
+                       formAction="#{teacherLessonController.deleteLesson()}"/>
     </ui:define>
 
 </ui:composition>
