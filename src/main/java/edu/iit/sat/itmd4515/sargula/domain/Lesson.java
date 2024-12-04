@@ -9,7 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -50,16 +52,28 @@ public class Lesson extends AbstractEntity {
     private List<Student> student = new ArrayList<>();
     
     /**
-     * ManyToMany bi-directional relationship
-     * Student is owning side
+     * ManyToOne bi-directional relationship
+     * Teacher is owning side
      * Lesson is inverse side
      *
      * This is inverse side
      *
      */
-    @ManyToMany(mappedBy = "lessons")
-    private List<Teacher> teacher = new ArrayList<>();
+    @ManyToOne
+//    (mappedBy = "lessons")
+    private Teacher teacher;
 
+    /**
+     * OneToOne uni-directional relationship
+     * Lesson is owning side
+     * Assignment is inverse side
+     *
+     * This is inverse side
+     *
+     */
+    @OneToOne
+    private Assignment assignment;
+    
     /**
      * Default constructor
      */
@@ -202,7 +216,7 @@ public class Lesson extends AbstractEntity {
      *
      * @return
      */
-    public List<Teacher> getTeachers() {
+    public Teacher getTeacher() {
         return teacher;
     }
 
@@ -210,8 +224,16 @@ public class Lesson extends AbstractEntity {
      *
      * @param teacher
      */
-    public void setTeachers(List<Teacher> teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
 
 }

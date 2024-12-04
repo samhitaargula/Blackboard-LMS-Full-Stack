@@ -38,9 +38,9 @@ public class Teacher extends AbstractPerson {
      * inverse side
      *
      * This is owning side
-    *
+     * 
      */
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "TEACHER_LESSONS",
             joinColumns = @JoinColumn(name = "TEACHER_ID"),
             inverseJoinColumns = @JoinColumn(name = "LESSON_ID"))
@@ -49,12 +49,14 @@ public class Teacher extends AbstractPerson {
     /**
      * OneToMany bi-directional relationship Assignment is owning side Teacher
      * is inverse side
-     *
+
      * This is inverse side
      *
      */
+    //Removed because Teacher Assignments have mapping with Lesson in common
 //    @OneToMany(mappedBy = "teacher")
 //    private List<Assignment> assignments = new ArrayList<>();
+    
     @OneToOne
     @JoinColumn(name = "USERNAME")
     private User user;
@@ -110,23 +112,6 @@ public class Teacher extends AbstractPerson {
         this.lessons = lessons;
     }
 
-    /**
-     * Get the value of assignments
-     *
-     * @return List<Assignment>
-     */
-//    public List<Assignment> getAssignments() {
-//        return assignments;
-//    }
-//
-//    /**
-//     * Set the value of subject
-//     *
-//     * @param assignments
-//     */
-//    public void setAssignments(List<Assignment> assignments) {
-//        this.assignments = assignments;
-//    }
     /**
      * Writes Teacher fields to string
      *
@@ -185,8 +170,8 @@ public class Teacher extends AbstractPerson {
         if (!this.lessons.contains(l)) {
             this.lessons.add(l);
         }
-        if (!l.getTeachers().contains(this)) {
-            l.getTeachers().add(this);
+        if (l.getTeacher() != this) {
+            l.setTeacher(this);
         }
     }
 
@@ -199,8 +184,8 @@ public class Teacher extends AbstractPerson {
         if (this.lessons.contains(l)) {
             this.lessons.remove(l);
         }
-        if (l.getTeachers().contains(this)) {
-            l.getTeachers().remove(this);
+        if (l.getTeacher() == this) {
+            l.setTeacher(null);
         }
     }
 

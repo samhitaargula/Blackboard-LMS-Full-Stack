@@ -88,7 +88,8 @@ public class Student extends AbstractPerson {
     }
 
     /**
-     * Helper method to remove lesson for student
+     * Helper method to 
+     * lesson for student
      *
      * @param l
      */

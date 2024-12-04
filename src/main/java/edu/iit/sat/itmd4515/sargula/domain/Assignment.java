@@ -7,7 +7,8 @@ package edu.iit.sat.itmd4515.sargula.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
-import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -19,9 +20,10 @@ import java.util.Objects;
 @Entity
 @NamedQuery(name = "Assignment.readAll", query = "select a from Assignment a")
 @NamedQuery(name = "Assignment.findAssignmentsForLesson", query="select a from Assignment a where a.lesson.id = :lessonid")
+@NamedQuery(name = "Assignment.findAssignmentsForTeacher", query="select a from Assignment a where a.lesson.teacher.id = :teacherid")
 public class Assignment extends AbstractEntity {
 
-    @FutureOrPresent
+    @PastOrPresent
     private LocalDate date;
     private LocalTime time;
 
@@ -42,21 +44,22 @@ public class Assignment extends AbstractEntity {
      * This is owning side
      *
      */
+    //Removed because Teacher Assignments have mapping with Lesson in common
 //    @ManyToOne
 //    private Teacher teacher;
 
     /**
-     * ManyToOne uni-directional relationship Assignment is owning side Lesson
-     * is inverse side
+     * OneToOne uni-directional relationship
+     * Assignment is owning side
+     * Lesson is inverse side
      *
      * This is owning side
      *
      */
-    @ManyToOne
+    @OneToOne
     private Lesson lesson;
 
-    private Boolean submitted;
-
+    private String title;
     private char grade;
 
     /**
@@ -68,15 +71,15 @@ public class Assignment extends AbstractEntity {
     /**
      * Parameterized constructor
      *
+     * @param title
      * @param date
      * @param time
-     * @param submitted
      * @param grade
      */
-    public Assignment(LocalDate date, LocalTime time, Boolean submitted, char grade) {
+    public Assignment(String title, LocalDate date, LocalTime time, char grade) {
+        this.title = title;
         this.date = date;
         this.time = time;
-        this.submitted = submitted;
         this.grade = grade;
     }
     
@@ -162,24 +165,6 @@ public class Assignment extends AbstractEntity {
     }
 
     /**
-     * Get the value of teacher
-     *
-     * @return Teacher
-     */
-//    public Teacher getTeacher() {
-//        return teacher;
-//    }
-//
-//    /**
-//     * Set the value of teacher
-//     *
-//     * @param teacher
-//     */
-//    public void setTeacher(Teacher teacher) {
-//        this.teacher = teacher;
-//    }
-
-    /**
      * Get the value of lesson
      *
      * @return Lesson
@@ -204,7 +189,7 @@ public class Assignment extends AbstractEntity {
      */
     @Override
     public String toString() {
-        return "Assignment{" + "date=" + date + ", time=" + time + ", student=" + student + ", lesson=" + lesson + ", submitted=" + submitted + ", grade=" + grade + '}'; //", teacher=" + teacher +
+        return "Assignment{" + "date=" + date + ", time=" + time + ", student=" + student + ", lesson=" + lesson + ", grade=" + grade + '}'; //", teacher=" + teacher +
     }
 
     /**
@@ -246,20 +231,20 @@ public class Assignment extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
-    public Boolean isSubmitted() {
-        return submitted;
-    }
-
-    public void setSubmitted(Boolean submitted) {
-        this.submitted = submitted;
-    }
-
     public char getGrade() {
         return grade;
     }
 
     public void setGrade(char grade) {
         this.grade = grade;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }
