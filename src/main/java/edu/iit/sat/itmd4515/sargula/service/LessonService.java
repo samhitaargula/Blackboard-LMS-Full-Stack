@@ -43,7 +43,15 @@ public class LessonService extends AbstractService<Lesson>{
         return LessonType.values();
     }
     
-    public void editLessonForAuthenticatedTeacher(Lesson lesson, Teacher student) {
+    public void createLessonForAuthenticatedTeacher(Lesson lesson, Teacher student) {
+        em.persist(lesson);
+        
+        Teacher teacherRef = em.getReference(Teacher.class, student.getId());
+        teacherRef.addTeacherLesson(lesson);
+        em.merge(teacherRef);
+    }
+    
+    public void editLessonForAuthenticatedTeacher(Lesson lesson) {
         Lesson managedRef = em.getReference(Lesson.class, lesson.getId());
         
         managedRef.setTitle(lesson.getTitle());
