@@ -7,12 +7,14 @@ package edu.iit.sat.itmd4515.sargula.service;
 import edu.iit.sat.itmd4515.sargula.domain.Lesson;
 import edu.iit.sat.itmd4515.sargula.domain.Teacher;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 import java.util.List;
 
 /**
  *
  * @author sargula
  */
+@Named
 @Stateless
 public class TeacherService extends AbstractService<Teacher>{
     
@@ -28,11 +30,4 @@ public class TeacherService extends AbstractService<Teacher>{
         return em.createNamedQuery("Teacher.findByUsername", Teacher.class).setParameter("uname", uname).getSingleResult();
     }
     
-    public void createLessonForAuthenticatedTeacher(Lesson lesson, Teacher student) {
-        em.persist(lesson);
-        
-        Teacher teacherRef = em.getReference(Teacher.class, student.getId());
-        teacherRef.addTeacherLesson(lesson);
-        em.merge(teacherRef);
-    }
 }

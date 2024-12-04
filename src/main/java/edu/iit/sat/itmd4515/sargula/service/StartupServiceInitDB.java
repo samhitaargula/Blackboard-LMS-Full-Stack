@@ -150,15 +150,15 @@ public class StartupServiceInitDB {
         studentSvc.create(stu3);
         studentSvc.create(stu4);
 
-        Assignment a1 = new Assignment(LocalDate.of(2024, 12, 15), LocalTime.of(9, 30), true, 'A');
+        Assignment a1 = new Assignment("Java Assignment", LocalDate.of(2024, 11, 15), LocalTime.of(9, 30), 'A');
         a1.submitAssignment(stu1, l1);
-        Assignment a2 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), true, 'B');
+        Assignment a2 = new Assignment("Java History Assignment", LocalDate.of(2024, 11, 20), LocalTime.of(9, 30), 'B');
         a2.submitAssignment(stu1, l2);
-        Assignment a3 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30), true, 'C');
+        Assignment a3 = new Assignment("OOPs Assignment", LocalDate.of(2024, 11, 30), LocalTime.of(9, 30), 'C');
         a3.submitAssignment(stu1, l3);
-        Assignment a4 = new Assignment(LocalDate.of(2024, 12, 30), LocalTime.of(9, 30), true, 'D');
+        Assignment a4 = new Assignment("Algorithms Assignment", LocalDate.of(2024, 11, 30), LocalTime.of(9, 30), 'D');
         a4.submitAssignment(stu2, l4);
-        Assignment a5 = new Assignment(LocalDate.of(2024, 12, 20), LocalTime.of(9, 30), false, 'F');
+        Assignment a5 = new Assignment("Design Assignment", LocalDate.of(2024, 11, 20), LocalTime.of(9, 30), 'F');
         a5.submitAssignment(stu3, l5);
 
         assnSvc.create(a1);
@@ -190,9 +190,9 @@ public class StartupServiceInitDB {
             }
 
             LOG.info("\tBi-directional relationship from Lesson (inverse) to Teacher >>>>>>>>>");
-            for (Teacher t : l.getTeachers()) {
-                LOG.info("\t" + t.toString() + "\n");
-            }
+//            for (Teacher t : l.getTeacher()) {
+                LOG.info("\t" + l.getTeacher().toString() + "\n");
+//            }
         }
 
         LOG.info("-----------------------------------------------------------------------------");
