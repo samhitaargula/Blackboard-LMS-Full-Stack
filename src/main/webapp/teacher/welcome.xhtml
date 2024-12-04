@@ -12,7 +12,7 @@
 
     <ui:define name="content">
         Teacher Content
-        
+
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{teacherWelcomeController.teacher.lessons}" var="lesson">
@@ -38,24 +38,85 @@
                 <h:outputText value="#{lesson.type}"/>
             </h:column>
 
-<!--            <h:column>
-                <f:facet name="header">Students</f:facet>
-                <ui:repeat value="#{lesson.students}" var="student">
-                    <h:outputText value="#{student.name}"/>
-                </ui:repeat>
-            </h:column>-->
+            <!--            <h:column>
+                            <f:facet name="header">Students</f:facet>
+                            <ui:repeat value="#{lesson.students}" var="student">
+                                <h:outputText value="#{student.name}"/>
+                            </ui:repeat>
+                        </h:column>-->
 
             <h:column>
                 <h:form>
                     <h:commandButton value="details" action="#{teacherLessonController.displayLessonDetailsPage(lesson)}"/>
                     <h:commandButton value="edit" action="#{teacherLessonController.displayEditLessonPage(lesson)}"/>
                     <h:commandButton value="delete" action="#{teacherLessonController.displayDeleteLessonPage(lesson)}"/>
+                    <h:commandButton value="grade assignment" action="#{teacherAssignmentController.displayGradeAssignmentPage(lesson)}"/>
                 </h:form>
             </h:column>
         </h:dataTable>
-        
+
         <h:form>
             <h:commandButton class="btn btn-lg btn-primary" value="Add New Lesson" action="#{teacherLessonController.displayAddLessonPage()}" />
+        </h:form>
+
+        <br/>
+        Assignment Grades
+        <h:dataTable 
+            styleClass="table table-striped table-hover"
+            value="#{teacherWelcomeController.assignments}" var="assignment">
+            <h:column>
+                <f:facet name="header">Assignment ID</f:facet>
+                <h:outputText value="#{assignment.id}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                <h:outputText value="#{assignment.title}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Student</f:facet>
+                <h:outputText value="#{assignment.student.name}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Grade</f:facet>
+                <h:outputText value="#{assignment.grade}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Submitted</f:facet>
+                <h:outputText value="#{assignment.date}">
+                    <f:convertDateTime type="localDate" dateStyle="long"/>
+                </h:outputText>
+                <h:outputText value=" "></h:outputText>
+                <h:outputText value="#{assignment.time}">
+                    <f:convertDateTime type="localTime" timeStyle="short"/>
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Lesson</f:facet>
+                <h:outputText value="#{assignment.lesson.title}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Teacher</f:facet>
+                <h:outputText value="#{assignment.lesson.teacher.name}"/>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                    <h:commandButton value="details" action="#{teacherAssignmentController.displayAssignmentDetailsPage(assignment)}"/>
+                    <h:commandButton value="edit" action="#{teacherAssignmentController.displayEditAssignmentPage(assignment)}"/>
+                    <h:commandButton value="delete" action="#{teacherAssignmentController.displayDeleteAssignmentPage(assignment)}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+
+        <h:form>
+            <h:commandButton class="btn btn-lg btn-primary" value="Grade Assignment" action="#{teacherAssignmentController.displayGradeAssignmentPage()}" />
         </h:form>
     </ui:define>
 

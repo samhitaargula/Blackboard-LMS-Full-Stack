@@ -15,31 +15,60 @@
 
         <h:dataTable 
             styleClass="table table-striped table-hover"
-            value="#{studentWelcomeController.student.lessons}" var="lesson">
+            value="#{studentWelcomeController.student.assignments}" var="assignment">
             <h:column>
-                <f:facet name="header">Lesson Id</f:facet>
-                <h:outputText value="#{lesson.id}"/>
+                <f:facet name="header">Assignment ID</f:facet>
+                <h:outputText value="#{assignment.id}"/>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Lesson Name</f:facet>
-                <h:outputText value="#{lesson.title}"/>
+                <f:facet name="header">Title</f:facet>
+                <h:outputText value="#{assignment.title}"/>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Lesson Date</f:facet>
-                <h:outputText value="#{lesson.lessonDate}">
-                    <f:convertDateTime type="localDate" dateStyle="long"/>
-                </h:outputText>
+                <f:facet name="header">Student</f:facet>
+                <h:outputText value="#{assignment.student.name}"/>
+            </h:column>
+
+            <!--            <h:column>
+                            <f:facet name="header">Submitted</f:facet>
+                            <h:outputText value="#{assignment.date}">
+                                <f:convertDateTime type="localDate" dateStyle="long"/>
+                            </h:outputText>
+                            <h:outputText value=" "></h:outputText>
+                            <h:outputText value="#{assignment.time}">
+                                <f:convertDateTime type="localTime" timeStyle="short"/>
+                            </h:outputText>
+                        </h:column>-->
+
+            <h:column>
+                <f:facet name="header">Lesson</f:facet>
+                <h:outputText value="#{assignment.lesson.title}"/>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Lesson Type</f:facet>
-                <h:outputText value="#{lesson.type}"/>
+                <f:facet name="header">Teacher</f:facet>
+                <h:outputText value="#{assignment.lesson.teacher.name}"/>
             </h:column>
 
+            <h:column>
+                <f:facet name="header">Grade</f:facet>
+                <h:outputText value="#{assignment.grade}"/>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                    <h:commandButton value="details" action="#{studentAssignmentController.displayAssignmentDetailsPage(assignment)}"/>
+                    <h:commandButton value="edit" action="#{studentAssignmentController.displayEditAssignmentPage(assignment)}"/>
+                    <h:commandButton value="delete" action="#{studentAssignmentController.displayDeleteAssignmentPage(assignment)}"/>
+                </h:form>
+            </h:column>
         </h:dataTable>
 
+        <h:form>
+            <h:commandButton class="btn btn-lg btn-primary" value="Submit Assignment" action="#{studentAssignmentController.displaySubmitAssignmentPage()}" />
+        </h:form>
     </ui:define>
 
 </ui:composition>
