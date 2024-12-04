@@ -2,14 +2,17 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
-                template="./WEB-INF/templates/template.xhtml">
+                template="./WEB-INF/templates/publicTemplate.xhtml">
 
     <ui:define name="title">
         Security Error Page
     </ui:define>
 
     <ui:define name="content">
-        Security Error
+        <main class="form-signin w-100 m-auto">
+            <h2>Security Error!</h2>
+            Your credentials seem to be wrong.
+        </main>
     </ui:define>
 
 </ui:composition>

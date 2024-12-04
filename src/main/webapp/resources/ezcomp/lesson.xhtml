@@ -8,6 +8,7 @@
       xmlns:f="jakarta.faces.core"
       xmlns:ui="jakarta.faces.facelets">
     <cc:interface>
+        <cc:attribute name="lesson" type="edu.iit.sat.itmd4515.sargula.domain.Lesson" required="true" />
         <cc:attribute name="formAction" required="false" method-signature="java.lang.String methodName()" />
         <cc:attribute name="operation" required="true" shortDescription="One of create, read, update, or delete" type="java.lang.String" />
     </cc:interface>
@@ -17,9 +18,9 @@
             <ui:fragment rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
                 <p>
                     <h:panelGroup layout="block">
-                        <h:outputLabel value="Lesson ID: #{teacherLessonController.lesson.id}" for="lessonId"/>
-                        <h:inputHidden id="lessonId" value="#{teacherLessonController.lesson.id}"/>
-                        <h:message for="lessonName" errorStyle="color: red"/>
+                        <h:outputLabel value="Lesson ID: #{cc.attrs.lesson.id}" for="lessonId"/>
+                        <h:inputHidden id="lessonId" value="#{cc.attrs.lesson.id}"/>
+                        <h:message for="lessonId" errorStyle="color: red"/>
                     </h:panelGroup>
                 </p>
             </ui:fragment>
@@ -31,7 +32,7 @@
                         disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
                         readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
                         id="lessonName" 
-                        value="#{teacherLessonController.lesson.title}"/>
+                        value="#{cc.attrs.lesson.title}"/>
                     <h:message for="lessonName" errorStyle="color: red"/>
                 </h:panelGroup>
             </p>
@@ -44,7 +45,7 @@
                         readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
                         p:type="date" 
                         id="lessonDate" 
-                        value="#{teacherLessonController.lesson.lessonDate}">
+                        value="#{cc.attrs.lesson.lessonDate}">
                         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
                     </h:inputText>
                     <h:message for="lessonDate" errorStyle="color: red"/>
@@ -58,7 +59,7 @@
                         disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
                         readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
                         id="lessonType" 
-                        value="#{teacherLessonController.lesson.type}">
+                        value="#{cc.attrs.lesson.type}">
                         <f:selectItems value="#{lessonService.allLessonTypes}"
                                        var="lessonType"
                                        itemLabel="#{type.label}"

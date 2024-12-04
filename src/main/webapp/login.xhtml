@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
-                template="./WEB-INF/templates/template.xhtml"
+                template="./WEB-INF/templates/publicTemplate.xhtml"
+                xmlns:p="jakarta.faces.passthrough"
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="title">
@@ -10,31 +11,41 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel value="Username: " for="username" />
+        <main class="form-signin w-100 m-auto">
+
+            <h1>Blackboard</h1><br/>
+            <h2 class="h3 mb-3 fw-normal">Sign in</h2>
+            <!--            <p><a href="apidocs/index.html">My API docs for the Final Project</a></p>-->
+
+            <h:form>
+                <h:panelGroup layout="block" class="form-floating">
                     <h:inputText binding="#{username}" id="username" 
+                                 p:placeholder="Username"
                                  styleClass="#{username.valid ? 'form-control' : 'form-control is-invalid'}"
                                  value="#{loginController.user.username}"/>
+                    <h:outputLabel value="Username: " for="username" />
                     <h:message for="username" errorStyle="color: red" />
                 </h:panelGroup>
-            </p>
 
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel value="Password:" for="password" />
-                    <h:inputSecret binding="#{password}" id="password" 
+                <h:panelGroup layout="block" class="form-floating">
+                    <h:inputSecret binding="#{password}" id="password"
+                                   p:placeholder="Password"
                                    styleClass="#{password.valid ? 'form-control' : 'form-control is-invalid'}"
                                    value="#{loginController.user.password}"/>
+                    <h:outputLabel value="Password:" for="password" />
                     <h:message for="password" errorStyle="color: red" />
                 </h:panelGroup>
-            </p>
 
-            <h:commandButton value="Login" action="#{loginController.doLogin()}"/>
+                <h:commandButton class="btn btn-primary w-100 py-2" 
+                                 value="Login" 
+                                 action="#{loginController.doLogin()}"/>
 
-        </h:form>
+                <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
+            </h:form>
 
+            <h:link outcome="studentSignup.xhtml" value="New Student? Register here!" />
+
+        </main>
     </ui:define>
 
 </ui:composition>
