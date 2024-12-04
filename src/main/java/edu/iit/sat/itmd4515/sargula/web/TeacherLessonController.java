@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class TeacherLessonController {
 
     @EJB LessonService lessonSvc;
-    @EJB TeacherService teacherSvc;
+//    @EJB TeacherService teacherSvc;
     @Inject TeacherWelcomeController twc;
     
     private static final Logger LOG = Logger.getLogger(TeacherLessonController.class.getName());
@@ -35,7 +35,7 @@ public class TeacherLessonController {
 
     @PostConstruct
     private void postContruct() {
-        LOG.info("Inside LessonController.postContruct");
+        LOG.info("Inside TeacherLessonController.postContruct");
         lesson = new Lesson();
     }
     
@@ -63,23 +63,23 @@ public class TeacherLessonController {
     }
     
     public String saveLesson(){
-        LOG.info("Inside LessonController.saveLesson with " + lesson.toString());
+        LOG.info("Inside TeacherLessonController.saveLesson with " + lesson.toString());
         //lessonSvc.create(lesson);
-        teacherSvc.createLessonForAuthenticatedTeacher(lesson, twc.getTeacher());
-        LOG.info("Inside LessonController.saveLesson after call to service " + lesson.toString());
+        lessonSvc.createLessonForAuthenticatedTeacher(lesson, twc.getTeacher());
+        LOG.info("Inside TeacherLessonController.saveLesson after call to service " + lesson.toString());
         
         return "/teacher/welcome.xhtml?faces-redirect=true";
     }
     
     public String editLesson(){
-        LOG.info("Inside LessonController.editLesson() before call to service: " + lesson.toString());
-        lessonSvc.editLessonForAuthenticatedTeacher(lesson, twc.getTeacher());
+        LOG.info("Inside TeacherLessonController.editLesson() before call to service: " + lesson.toString());
+        lessonSvc.editLessonForAuthenticatedTeacher(lesson);
         
         return "/teacher/welcome.xhtml?faces-redirect=true";
     }
 
     public String deleteLesson(){
-        LOG.info("Inside LessonController.deleteLesson() before call to service: " + lesson.toString());
+        LOG.info("Inside TeacherLessonController.deleteLesson() before call to service: " + lesson.toString());
         lessonSvc.deleteLessonForAuthenticatedTeacher(lesson, twc.getTeacher());
         
         return "/teacher/welcome.xhtml?faces-redirect=true";
