@@ -50,7 +50,7 @@ In my Blackboard LMS, I have the following entities:
 * Assignment N:1 Student
 * Teacher 1:1 Subject
 
-### ERD diagram
+### Entity Relationship Diagram
 ![Final ERD](https://github.com/user-attachments/assets/b20a91f2-6dd1-4056-9f9c-a962b17f006b)
 
 
@@ -111,3 +111,42 @@ Security
 
 11. Logout
 - Logout button on all pages logs the user out and takes them back to the login page.
+
+# Requirements
+- Apache Netbeans IDE 22
+- Java version "17.0.12" (OpenJDK 17)
+- JRE 1.8
+- Payara Server 6.2
+- MySQL Community Server 8.0
+- MySQL Notifier 1.1.8
+- MySQL Workbench 8.0
+
+### Installation and Setup
+1. Download GitHub code from https://github.com/itmd4515/itmd4515-f24-fp-samhitaargula
+2. Open Netbeans and create a new project.
+3. Clone repository from Team->Remote->Clone.
+![image](https://github.com/user-attachments/assets/c9a0753c-1326-4ec6-a84b-4d58c26b9dd9)
+4. Add repository URL and give user and password from personal access token.
+![image](https://github.com/user-attachments/assets/92cd507b-97dc-4a04-8883-207f2d571630)
+5. Add Payara Server from the sidebar, Services->Right click on Servers->Add Server
+![image](https://github.com/user-attachments/assets/7fac5c80-ac37-4218-b31a-67a147fa8ea3)
+6. Add the Payara server installation location, keep default domain, host and port.
+![image](https://github.com/user-attachments/assets/d9767cea-a679-4119-83a4-280158e8d448)
+
+### Compile
+Once you finish installation, select the project, right click and select Clean and Build. This will compile the project and show compile time errors, if any.
+![image](https://github.com/user-attachments/assets/cd774d2d-e65f-43fb-b70c-75f16e1fac8a)
+![image](https://github.com/user-attachments/assets/8e6cabca-8ff6-402c-9ef6-adeac09a2068)
+
+### Runtime
+To run, you can right click on project once again and select run or click on the run button from the toolbar. This will run the project and give you runtime and Payara logs. This will automatically open http://localhost:8080/sargula-fp/ in your browser, for a successful run.
+![image](https://github.com/user-attachments/assets/2a456321-0284-4d99-97b8-5050ead5f409)
+![image](https://github.com/user-attachments/assets/3f6e82c0-635a-4dc8-89bb-1e8e708cde89)
+
+### Database
+To check database changes, you can use MySQL Workbench or CLI.
+1. In MySQL Workbench, click on New connection. Setup database itmd4515 with the same username and password we have been using.
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/8eeac420-94bd-4b5a-bd37-bf65aee266c5">
+2. You can view and query all the tables here.
+
+![image](https://github.com/user-attachments/assets/dcaa3ff9-4944-44e6-a92b-12952dbe2bee)
