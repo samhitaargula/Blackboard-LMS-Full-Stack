@@ -150,3 +150,67 @@ To check database changes, you can use MySQL Workbench or CLI.
 2. You can view and query all the tables here.
 
 ![image](https://github.com/user-attachments/assets/dcaa3ff9-4944-44e6-a92b-12952dbe2bee)
+
+# Screen Captures
+<a name="signup">Signup</a>
+
+![image](https://github.com/user-attachments/assets/8eb109ec-56ce-45a6-9719-4e1e4cd9451c)
+![image](https://github.com/user-attachments/assets/ea004ffb-ad51-4ce3-b77e-34aa739fb9d9)
+
+<a name="admin">Admin flow</a>
+
+![image](https://github.com/user-attachments/assets/d2b9f7cd-c6fa-4d75-981e-7c157782436f)
+![image](https://github.com/user-attachments/assets/504772da-960d-42a1-85b4-6e1fd04cf916)
+![image](https://github.com/user-attachments/assets/651b20f5-39f3-4636-8bcc-5f992acf4116)
+
+<a name="teacher">Teacher flow</a>
+
+![image](https://github.com/user-attachments/assets/8c6926b8-453f-476c-88f9-0c21de6e0855)
+![image](https://github.com/user-attachments/assets/aaf052ba-5083-422a-b65a-c639cf120b3f)
+![image](https://github.com/user-attachments/assets/b78089ff-2b5c-45fd-8e03-4940f62155b2)
+
+Teacher Lessons table
+
+![image](https://github.com/user-attachments/assets/8695b17e-4a95-44e8-bff4-d970978882b9)
+![image](https://github.com/user-attachments/assets/5ca033df-2d4a-4b9a-8961-aecf9ad58508)
+![image](https://github.com/user-attachments/assets/17a7213d-3065-473f-9df0-8c5b23f6157d)
+![image](https://github.com/user-attachments/assets/11e54fe5-4e32-47c0-858b-16b21063514e)
+![image](https://github.com/user-attachments/assets/bb5a8ae3-deae-4d13-96ba-6361a32e595c)
+![image](https://github.com/user-attachments/assets/a4e79ae9-be2a-486e-8f24-8f56394e4afd)
+
+Teacher Assignments table
+![image](https://github.com/user-attachments/assets/62ef4851-b2bf-4721-914c-854ff7448c2c)
+![image](https://github.com/user-attachments/assets/16135379-2a08-4193-a0a3-469449016e22)
+![image](https://github.com/user-attachments/assets/5fd7a273-213e-418c-b9c2-12968e01ed74)
+![image](https://github.com/user-attachments/assets/79c6fad6-b33c-4f42-9ef9-a912fddc50b8)
+![image](https://github.com/user-attachments/assets/4579d40e-49a4-4454-ac90-72f2dce8115e)
+![image](https://github.com/user-attachments/assets/a4e1b009-5d95-4816-ad33-17f3acd69d37)
+![image](https://github.com/user-attachments/assets/e36fd4d2-603a-40d9-a101-f7e697bbc72d)
+![image](https://github.com/user-attachments/assets/76cda8ba-e9dd-4f7a-80a7-07a8e0b043d0)
+
+
+# Test Script/Expected Results
+[Signup](#signup)
+1. Click on New Student Register link on login page.
+2. Give your details name, email, username and password and click on Register.
+3. You can now login with your new credentials!
+
+[Admin flow](#admin)
+1. Login as user admin with password admin. You land on Admin home page.
+2. Navigate to Admin access page to see an overall list of all teacher lesson plans.
+3. Make note that only admin tables have a different dark shading in this app.
+4. Logout.
+
+[Teacher flow](#teacher)
+1. Login as user teacher1 with password teacher1. You land on Teacher home page.
+2. Since teacher1 is an admin, navigate to Admin Access to see the same admin page with customized teacher details on top.
+3. Navigate to Teacher access. The first table is the Lessons taught by the teacher.
+4. Click Add New Lesson. Give Lesson Name as Sample, today's date and keep it as INTRO default or any type, and click on Create Lesson.
+5. You will now see the new Lesson in the list. Click on Details and you'll see the details we have given.
+6. Go back to the table and click on Edit. Change the Lesson name to XYZ now and click Edit. You can see the changed Lesson name in the table and if you changed any other details.
+7. Scroll down to second table, which is the Assignments given by the teacher. Click on Grade Assignment.
+8. Give Title: Sample Assign, Lesson: XYZ, current time and date, Student: Java Student, Grade: A and click Submit.
+9. You will now see the new Assignment in the list. Click on Details and you'll see the details we have given.
+10. Go back to the table and click on Edit. Change the Assignment name to WXYZ now and click Edit. You can see the changed Assignment name in the table and if you changed any other details.
+11. Now I don't like these gibberish names, so I want them gone. So if I scroll up to Lessons table, click Delete next to the XYZ lesson we created and delete lesson.
+12. You see that now the Lesson and the related Assignment are both deleted from their respective tables.
