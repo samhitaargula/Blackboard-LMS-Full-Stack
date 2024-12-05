@@ -12,6 +12,7 @@ Welcome to Blackboard, a Learning Management System. Similar to the Canvas we al
 4. Security Layer:
 - Created security users and groups to provide role based access. Each user or group only sees and accesses the data that they have permission to view. They can only make authorized, valid changes to the database. And an external user is not able to login.
 
+
 # Design
 In my Blackboard LMS, I have the following entities:
 1.	Lesson
@@ -112,6 +113,31 @@ Security
 11. Logout
 - Logout button on all pages logs the user out and takes them back to the login page.
 
+## Extra Credit
+1. Incorporated an EJB Timer Service.
+- Wrote pretty basic code. After sign up, a class SuccessTimer is called which creates a timer of 5 seconds until the Student is registered in the database. It then times out and gives back successful student user created message in logs.
+```
+@Stateless
+public class SuccessTimer {
+
+    @Resource
+    private SessionContext context;
+
+    public void createTimer() {
+        context.getTimerService().createTimer(5000, "Student user created!");
+    }
+
+    @Timeout
+    public void timeOutHandler(Timer timer) {
+        System.out.println("TimeoutHandler : " + timer.getInfo());
+        timer.cancel();
+    }
+
+}
+```
+![image](https://github.com/user-attachments/assets/27b6ccf7-1d3f-4667-b090-560966eb7d30)
+
+
 # Requirements
 - Apache Netbeans IDE 22
 - Java version "17.0.12" (OpenJDK 17)
@@ -150,6 +176,7 @@ To check database changes, you can use MySQL Workbench or CLI.
 2. You can view and query all the tables here.
 
 ![image](https://github.com/user-attachments/assets/dcaa3ff9-4944-44e6-a92b-12952dbe2bee)
+
 
 # Screen Captures
 <a name="signup">Signup</a>
@@ -219,6 +246,7 @@ Teacher Assignments table
 <a name="database">Database</a>
 
 ![image](https://github.com/user-attachments/assets/a609518a-935c-42ad-ae7c-413960494805)
+![image](https://github.com/user-attachments/assets/0d6d9a1e-db53-41cf-baf7-05fc9a79d4ed)
 
 
 # Test Script/Expected Results
