@@ -78,4 +78,36 @@ Security
 * Lessons – Read, Write, Delete
 * Assignments – Read, Write, Delete
 
+## Navigation flow
+1. Login Page
+- All users start here. If you have valid credentials, you are authorized against the database and are able to login and access LMS.
 
+2. Sign up Page
+- New students are able to register on the LMS with the sign up page. They have to simply input their name, email, provide a good username and password. They are then redirected to login page where they can enter their credentials and login.
+
+3. Security Access Page
+- If an unauthorized user tries to login to the LMS, the credentials fail to validate against the database, a security error is thrown and they are not let in.
+
+4. Home Page
+- Admins, teachers and students all have home pages where they first land after login. It just welcomes the user with the correct user details.
+
+5. Admin Page
+- If user is admin, they have access to Admin page where they can see lesson plans of all teachers and admin has access to every lesson.
+
+6. Teacher Page
+- If user is teacher, they have access to Teacher page where they can see their own lesson plans and assignments grading. They are able to run operations like view, edit, delete on all those records.
+
+7. Student Page
+- If user is teacher, they have access to Teacher page where they can see their assignments and submit them for grading. They are able to run operations like view, edit, delete on all those records, with the fields that they can access.
+
+8. Lesson Page
+- On the Lesson pages, Admin/Teacher can view, edit or delete lessons.
+
+9. Assignment Page
+- On the Assignment pages, Admin/Teacher can view, edit or delete assignments and grade them. Students can submit, edit assignments or delete their drafts.
+
+10. Error page
+- If an unauthorized action is attempted, the user is redirected to an error page.
+
+11. Logout
+- Logout button on all pages logs the user out and takes them back to the login page.
