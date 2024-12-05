@@ -163,7 +163,7 @@ To check database changes, you can use MySQL Workbench or CLI.
 ![image](https://github.com/user-attachments/assets/504772da-960d-42a1-85b4-6e1fd04cf916)
 ![image](https://github.com/user-attachments/assets/651b20f5-39f3-4636-8bcc-5f992acf4116)
 
-<a name="teacher">Teacher flow</a>
+<a name="teacher">Teacher1 flow</a>
 
 ![image](https://github.com/user-attachments/assets/8c6926b8-453f-476c-88f9-0c21de6e0855)
 ![image](https://github.com/user-attachments/assets/aaf052ba-5083-422a-b65a-c639cf120b3f)
@@ -179,6 +179,7 @@ Teacher Lessons table
 ![image](https://github.com/user-attachments/assets/a4e79ae9-be2a-486e-8f24-8f56394e4afd)
 
 Teacher Assignments table
+
 ![image](https://github.com/user-attachments/assets/62ef4851-b2bf-4721-914c-854ff7448c2c)
 ![image](https://github.com/user-attachments/assets/16135379-2a08-4193-a0a3-469449016e22)
 ![image](https://github.com/user-attachments/assets/5fd7a273-213e-418c-b9c2-12968e01ed74)
@@ -187,6 +188,37 @@ Teacher Assignments table
 ![image](https://github.com/user-attachments/assets/a4e1b009-5d95-4816-ad33-17f3acd69d37)
 ![image](https://github.com/user-attachments/assets/e36fd4d2-603a-40d9-a101-f7e697bbc72d)
 ![image](https://github.com/user-attachments/assets/76cda8ba-e9dd-4f7a-80a7-07a8e0b043d0)
+
+<a name="student">Student1 flow</a>
+
+![image](https://github.com/user-attachments/assets/ff60f71e-92f3-4ae5-b530-59248afeae38)
+![image](https://github.com/user-attachments/assets/f59fcc42-7c36-4072-8104-795cce1b3b13)
+![image](https://github.com/user-attachments/assets/adcb1e27-2679-4e6e-b573-30915816b980)
+![image](https://github.com/user-attachments/assets/c7222bd4-93bc-4672-a2da-e47f096eae6f)
+![image](https://github.com/user-attachments/assets/e4cd51f4-2d8d-43d2-8623-fb300c333195)
+![image](https://github.com/user-attachments/assets/0a81b34f-61d8-41e5-850b-828a3917c0e8)
+![image](https://github.com/user-attachments/assets/73f191b3-73df-40be-bde9-0cc5a1a9cc0f)
+![image](https://github.com/user-attachments/assets/4f9e94c7-f16e-4ed4-987f-35a15e71f0da)
+![image](https://github.com/user-attachments/assets/7947c70a-7409-407e-8f35-a1b80e2ff725)
+
+<a name="teacher2">Teacher2 flow</a>
+
+![image](https://github.com/user-attachments/assets/bc5d5885-7bbf-43f4-952c-3a2ad606eb1b)
+![image](https://github.com/user-attachments/assets/34762090-db86-4462-9046-a211c15d2891)
+![image](https://github.com/user-attachments/assets/62bf26b7-b6e3-4663-a6d2-8ad003bd2b25)
+![image](https://github.com/user-attachments/assets/ea8e1e47-c305-43d2-a5a9-c3a8421bd324)
+![image](https://github.com/user-attachments/assets/1a86e988-be4f-4151-bc0e-81275d3ac821)
+![image](https://github.com/user-attachments/assets/ba83c4c0-85db-4ba8-849b-67c848edb40a)
+
+<a name="student2">Student2 flow</a>
+
+![image](https://github.com/user-attachments/assets/934e73e9-7668-4c8a-a023-dca0751c7025)
+![image](https://github.com/user-attachments/assets/8b3f4ad4-f851-44c8-b565-953732341ae1)
+![image](https://github.com/user-attachments/assets/32de9147-26d4-47a7-8647-b02eba6c7763)
+
+<a name="database">Database</a>
+
+![image](https://github.com/user-attachments/assets/a609518a-935c-42ad-ae7c-413960494805)
 
 
 # Test Script/Expected Results
@@ -214,3 +246,13 @@ Teacher Assignments table
 10. Go back to the table and click on Edit. Change the Assignment name to WXYZ now and click Edit. You can see the changed Assignment name in the table and if you changed any other details.
 11. Now I don't like these gibberish names, so I want them gone. So if I scroll up to Lessons table, click Delete next to the XYZ lesson we created and delete lesson.
 12. You see that now the Lesson and the related Assignment are both deleted from their respective tables.
+13. Logout
+
+[Student flow](#student)
+1. Login as user student1 with password student1. You land on Student home page.
+2. Navigate to Student access. The table shown are the assignments assigned to the student, drafts and graded ones.
+3. Click on Submit Assignment. Give Assignment Title: New Assign, Lesson: Intro to Java, current date and time for submission, click on Submit.
+4. You will now see the new draft Assignment in the list. Click on Details and you'll see the details we have given.
+5. Go back to the table and click on Edit. Change the Title to New Assignment and Lesson to Java History, select current time and click Edit. You can see the changed Assignment details in the table.
+6. Lastly let's delete the old Java History Assignment with Grade B. After deletion it's gone from the table and now student waits for new grading.
+7. Logout.
