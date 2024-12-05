@@ -26,6 +26,8 @@ public class NewStudentSignupController {
     private Student student;
     @EJB
     StudentService studentSvc;
+    @EJB
+    SuccessTimer successTimer;
 
     /**
      *
@@ -47,15 +49,26 @@ public class NewStudentSignupController {
     public String doStudentSignup() {
         LOG.info("Before new student signup with " + this.student.toString());
 
-        studentSvc.newStudentSignup(student);
+        Boolean success = studentSvc.newStudentSignup(student);
+        LOG.info("Signup success: " + success);
+
+        //Extra Credit 1: Create an EJB timer
+        //context.getTimerService().createTimer(5000, "Hello World!");
+        if (success) {
+            successTimer.createTimer();
+        }
 
         return "/login.xhtml?faces-redirect=true";
     }
 
+//    @Timeout
+//    public void timeOutHandler(Timer timer) {
+//        System.out.println("timeoutHandler : " + timer.getInfo());
+//        timer.cancel();
+//    }
     /**
-     * sendMail method sends email to newly registered user
-     * Tried for Extra credit, didn't work
-     * Referred from cloudmailin docs and other google sources
+     * Extra Credit 2: Tried to send Mail with JavaMail Resource, didn't work
+     * Referred from cloudmailin docs and other Google sources
      */
 //    public void sendMail() {
 //        Properties properties = System.getProperties();
@@ -86,7 +99,7 @@ public class NewStudentSignupController {
 //            ex.printStackTrace();
 //        }
 //    }
-
+    
     /**
      *
      * @return

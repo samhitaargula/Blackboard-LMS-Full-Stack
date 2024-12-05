@@ -31,7 +31,7 @@ public class StudentService extends AbstractService<Student>{
         return em.createNamedQuery("Student.findByUsername", Student.class).setParameter("uname", uname).getSingleResult();
     }
     
-    public void newStudentSignup(Student s) {
+    public boolean newStudentSignup(Student s) {
         Group studentGroup
                 = em.createQuery("select g from Group g where g.groupName = 'STUDENT_GROUP'", Group.class).getSingleResult();
         User newStudentUser = s.getUser();
@@ -39,5 +39,8 @@ public class StudentService extends AbstractService<Student>{
         em.persist(newStudentUser);
         
         s.setUser(newStudentUser);
+        em.persist(s);
+        
+        return em.contains(s);
     }
 }

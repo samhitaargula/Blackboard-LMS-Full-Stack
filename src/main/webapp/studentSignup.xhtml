@@ -28,6 +28,7 @@
                 
                 <h:panelGroup layout="block" class="form-floating">
                     <h:inputText id="studentEmail" 
+                                 type="email"
                                  p:placeholder="studentName"
                                  styleClass="#{username.valid ? 'form-control' : 'form-control is-invalid'}"
                                  value="#{newStudentSignupController.student.email}"/>
@@ -56,7 +57,7 @@
                 <h:commandButton class="btn btn-primary w-100 py-2" 
                                  value="Register" 
                                  action="#{newStudentSignupController.doStudentSignup()}"/>
-
+                
                 <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
             </h:form>
         </main>
