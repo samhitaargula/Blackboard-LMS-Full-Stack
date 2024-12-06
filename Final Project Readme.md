@@ -14,42 +14,65 @@ Welcome to Blackboard, a Learning Management System. Similar to the Canvas we al
 
 
 # Design
-In my Blackboard LMS, I have the following entities:
-1.	Lesson
-* This is the basic learning entity which represents learning content in the system. It is the smallest learning unit, comprising of a single topic.
-* Attributes: id, lessondate, title, type.
-* Relationships: A lesson is assigned to every student and taught by a teacher. Lesson and student relate in a many to many relationship. Each lesson is assigned to multiple students, who in turn have multiple lessons assigned to them.
+### Business Domain Entities
 
-2.	Student
-* A learner entity who is enrolled in the LMS and consumes lessons and assignments.
-* Attributes: id, name, email.
-* Relationships: A student is assigned multiple lessons and thus can have multiple assignments.
+1. Lesson
+- This is the basic learning entity which represents learning content in the system. It is the smallest learning unit, comprising of a single topic.
+- Attributes: id, lessondate, title, type.
+- Relationships: A lesson is assigned to every student and taught by a teacher. Lesson and student relate in a many to many relationship. Each lesson is assigned to multiple students, who in turn have multiple lessons assigned to them.
 
-3.	Teacher
-* A teaching entity who creates and manages lessons and assignments in the LMS.
-* Attributes: id, name, teacher_subject.
-* Relationships: A teacher creates multiple lessons for their subject and creates assignments for their students.
+2. Student
+- A learner entity who is enrolled in the LMS and consumes lessons and assignments.
+- Attributes: id, name, email.
+- Relationships: A student is assigned multiple lessons and thus can have multiple assignments.
 
-4.	Assignment
-* A learning entity which represents a task or project assigned to students as part of a lesson.
-* Attributes: id, date, time, lesson_id, student_id, teacher_id.
-* Relationships: A lesson can have multiple assignments; a student can be assigned multiple assignments and a teacher can generate multiple assignments.
+3. Teacher
+- A teaching entity who creates and manages lessons and assignments in the LMS.
+- Attributes: id, name, teacher_subject.
+- Relationships: A teacher creates multiple lessons for their subject and creates assignments for their students.
 
-5.	Subject
-* Represents specialization of a teacher, what area a teacher is teaching to students.
-* Attributes: id, name.
-* Relationships: A teacher teaches one subject, in which their specialization is.
+4. Assignment
+- A learning entity which represents a task or project assigned to students as part of a lesson.
+- Attributes: id, date, time, lesson_id, student_id, teacher_id.
+- Relationships: A lesson can have multiple assignments; a student can be assigned multiple assignments and a teacher can generate multiple assignments.
 
-6.	Student_Lessons
-* Represents the many-to-many relationship between students and lessons, recording the assignment of lessons to students.
-* Attributes: id, lessondate, title, type.
-* Relationships: Links students and lessons in a many-to-many relationship.
+5. Subject
+- Represents specialization of a teacher, what area a teacher is teaching to students.
+- Attributes: id, name.
+- Relationships: A teacher teaches one subject, in which their specialization is.
+
+6. Student_Lessons
+- Represents the many-to-many relationship between students and lessons, recording the assignment of lessons to students.
+- Attributes: lesson_id_, student_id.
+- Relationships: Links students and lessons in a many-to-many relationship.
+
+7. Teacher_Lessons
+- Represents the many-to-many relationship between teachers and lessons, recording the teacher who created the assignment.
+- Attributes: teacher_id, lesson_id.
+- Relationships: Links teachers and lessons in a many-to-many relationship.
+
+### Security Domain Entities
+1. User
+- Represents a user of the LMS who has login credentials to gain access to the system.
+- Attributes: username, password.
+- Relationships: A user can belong to many groups.
+
+2. Group
+- Represents a user role of the LMS, which is used to define the access level of a user in the system.
+- Attributes: groupname, groupdesc.
+- Relationships: A group can have multiple users.
+
+3. User_Groups
+- Represents the many-to-many relationship between users and groups, recording which user belongs to which group.
+- Attributes: username, groupname.
+- Relationships: Links users and groups in a many-to-many relationship.
 
 ### Relationships
-* Student M:N Lesson
-* Assignment N:1 Lesson
-* Assignment N:1 Student
-* Teacher 1:1 Subject
+- Student M:N Lesson
+- Assignment N:1 Lesson
+- Assignment N:1 Student
+- Teacher 1:1 Subject
+- User M:N Group
 
 ### Entity Relationship Diagram
 ![Final ERD](https://github.com/user-attachments/assets/b20a91f2-6dd1-4056-9f9c-a962b17f006b)
@@ -61,7 +84,7 @@ In our LMS, all our entities have an Id, so they inherit AbstractEntity class wh
 
 ## Functionality with roles & security
 
-The primary roles in our LMS right now are Student and Teacher. It can also have an Admin role. These roles will have specific functionality and permissions.
+The primary user roles in our LMS are Student, Teacher and Admin. These roles have specific functionality and permissions.
 
 Functionality for Students
 * View Lessons: Students can view lessons and learn from them.
@@ -73,7 +96,7 @@ Security
 
 Functionality for Teachers
 * Create and Manage Lessons: Teachers can create, update, and delete lessons for the subjects they teach.
-* Create and Assign Assignments: Teachers can create assignments and assign them to students.
+* Create and Grade Assignments: Teachers can create assignments to students and give grades.
 
 Security
 * Lessons – Read, Write, Delete
@@ -174,6 +197,7 @@ To run, you can right click on project once again and select run or click on the
 To check database changes, you can use MySQL Workbench or CLI.
 1. In MySQL Workbench, click on New connection. Setup database itmd4515 with the same username and password we have been using.
 <img width="960" alt="image" src="https://github.com/user-attachments/assets/8eeac420-94bd-4b5a-bd37-bf65aee266c5">
+
 2. You can view and query all the tables here.
 
 ![image](https://github.com/user-attachments/assets/dcaa3ff9-4944-44e6-a92b-12952dbe2bee)
