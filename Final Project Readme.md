@@ -275,7 +275,7 @@ Teacher Assignments table
 
 
 # Test Script/Expected Results
-[Signup](#signup)
+[Signup flow](#signup)
 1. Click on New Student Register link on login page.
 2. Give your details name, email, username and password and click on Register.
 3. You can now login with your new credentials!
@@ -324,7 +324,7 @@ Teacher Assignments table
 - I did not like any of the extra credit options. I tried to implement almost each one with help from Google pages, but I couldn't get any of them to work.
 - I kept searching Google and did extensive debugging with the help of stackoverflow and even asked AI.
 
-
+### Extra Credit Trials
 1. I tried sending an email using **JavaMail** Resource. Below are most of the variations I tried with smtp gmail and other custom smtps I found online. Everytime it gave me port, host, smtp errors and after fixing them, authentication errors.
 ```
 public void sendMail() {
