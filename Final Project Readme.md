@@ -116,6 +116,7 @@ Security
 ## Extra Credit
 1. Incorporated an EJB Timer Service.
 - Wrote pretty basic code. After sign up, a class SuccessTimer is called which creates a timer of 5 seconds until the Student is registered in the database. It then times out and gives back successful student user created message in logs.
+- I tried to do a more UI based thing, but it wasn't working as I cannot call outside methods from this class, especially EJBs. Hence it's all in the logs.
 ```
 @Stateless
 public class SuccessTimer {
@@ -241,7 +242,7 @@ Teacher Assignments table
 
 ![image](https://github.com/user-attachments/assets/934e73e9-7668-4c8a-a023-dca0751c7025)
 ![image](https://github.com/user-attachments/assets/8b3f4ad4-f851-44c8-b565-953732341ae1)
-![image](https://github.com/user-attachments/assets/32de9147-26d4-47a7-8647-b02eba6c7763)
+![image](https://github.com/user-attachments/assets/bc6bfe49-e6e9-43c4-a86a-668cf63d1601)
 
 <a name="database">Database</a>
 
@@ -284,3 +285,100 @@ Teacher Assignments table
 5. Go back to the table and click on Edit. Change the Title to New Assignment and Lesson to Java History, select current time and click Edit. You can see the changed Assignment details in the table.
 6. Lastly let's delete the old Java History Assignment with Grade B. After deletion it's gone from the table and now student waits for new grading.
 7. Logout.
+
+# Development Insights
+- I think the project went pretty great and I learned a lot.
+- **I completed all the requirements given and I am very glad! :)**
+- My main takeaways are the things I learned about entity models, persistence and EJBs. Learning these kind of things is further helpful in any kind of programming and ingrain in us how files are structured for a sizable application to work.
+- I really wanted to design the UI better and have much better dashboards, but I ran out of time.
+
+
+- With the feedback I got during midterm about my domain model, I removed the relationship between Teacher and Assignment as they can be related through Lesson in the middle.
+- This took some effort initially as I tried to navigate two levels of relationships, but in the end it wasn't as hard as I thought.
+
+
+- I did not like any of the extra credit options. I tried to implement almost each one with help from Google pages, but I couldn't get any of them to work.
+- I kept searching Google and did extensive debugging with the help of stackoverflow and even asked AI.
+
+
+1. I tried sending an email using **JavaMail** Resource. Below are most of the variations I tried with smtp gmail and other custom smtps I found online. Everytime it gave me port, host, smtp errors and after fixing them, authentication errors.
+```
+public void sendMail() {
+//        Properties props = new Properties();
+//        props.put("mail.smtp.auth", "true");
+//        props.put("mail.smtp.starttls.enable", "true");
+//        props.put("mail.smtp.host", "8080");
+//        props.put("mail.smtp.port", "587");
+//        props.put("mail.debug", "true");
+//        jakarta.mail.Authenticator auth = new jakarta.mail.Authenticator() {
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//               return new PasswordAuthentication(student.getUser().getUsername(), student.getUser().getPassword());
+//            }
+//        };
+//
+//        Session session = Session.getInstance(props, auth);
+//        Session session = Session.getInstance(props, new Authenticator() {
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(student.getUser().getUsername(), student.getUser().getPassword());
+//            }
+//        });
+    Properties properties = System.getProperties();
+    properties.put("mail.smtp.host", "live.smtp.mailtrap.io");
+    properties.put("mail.smtp.port", 587);
+    properties.put("mail.smtp.auth", "true");
+    properties.put("mail.smtp.starttls.enable", "true");
+    
+    Session session = Session.getInstance(properties,
+        new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("api", "9c8aee72e7e4ebdd64b57bf2df163e1e");
+            }
+        });
+
+    try {
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("blackboard@yopmail.com"));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(student.getEmail()));
+        message.setSubject("Blackboard Student Registration Successful!");
+        message.setText("Welcome to Blackboard! You are registered and can access your lessons now.");
+
+        Transport.send(message);
+
+        System.out.println("Email sent successfully.");
+    } catch (MessagingException ex) {
+        ex.printStackTrace();
+    }
+}
+```
+```
+Could not connect to SMTP host: smtp.gmail, port: 80, response: -1
+```
+
+2. I tried incorporating **PrimeFaces** in my project following this [site](https://www.baeldung.com/jsf-primefaces) to the dot, to create a Button and Dialog box. Here, the project did not like any PrimeFaces related dependency I tried to add, always throwing one of the following errors. Ofcourse I tried with various versions of the dependency too, still couldn't get it to work.
+```
+<dependency>
+    <groupId>org.primefaces</groupId>
+    <artifactId>primefaces</artifactId>
+    <version>6.2</version>
+</dependency>
+```
+```
+java.lang.noclassdeffounderror: javax/faces/context/facescontextfactory
+```
+```
+error creating managed object for class: class com.sun.faces.taglib.jsf_core.regexvalidatortag
+```
+
+I also got pretty stuck on the simple namespaces issue, finally adding the below to my xhtml after multiple winding searches whether it can only be added to html tag or even our ui:composition tag.
+```
+xmlns:p="http://primefaces.org/ui"
+```
+
+3. Lastly, I tried implementing a **Bean Custom Validator** from this [site](https://dzone.com/articles/create-your-own-constraint-with-bean-validation-20).
+- Here, Netbeans didn't recognize some of tags like @Repeatable.
+- I tried to add a constraint to my Assignment.Grade field which is of Character type. In hindsight, I could maybe have chosen a field with a better datatype. But the amount of issues these things were throwing, I didn't know how to further debug any of them.
+
+
+
+Yes, I do feel bad some things didn't work out in the end. But I'm happy I tried many things and learned a lot along the way.
