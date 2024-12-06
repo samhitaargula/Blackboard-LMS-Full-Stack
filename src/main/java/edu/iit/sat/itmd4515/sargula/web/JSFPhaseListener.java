@@ -10,17 +10,28 @@ import jakarta.faces.event.PhaseListener;
 import java.util.logging.Logger;
 
 /**
+ * JSFPhaseListener class to add logs at beginning and end of life cycle phases.
  *
  * @author sargula
  */
 public class JSFPhaseListener implements PhaseListener {
     private static final Logger LOG = Logger.getLogger(JSFPhaseListener.class.getName());
 
+    /**
+     * Get the phase id
+     *
+     * @return
+     */
     @Override
     public PhaseId getPhaseId() {
         return PhaseId.ANY_PHASE;
     }
     
+    /**
+     * Method for before phase
+     *
+     * @param event
+     */
     @Override
     public void beforePhase(PhaseEvent event) {
         
@@ -31,6 +42,11 @@ public class JSFPhaseListener implements PhaseListener {
         LOG.info("Before JSF Phase =================> " + event.getPhaseId());
     }
     
+    /**
+     * Method for after phase
+     *
+     * @param event
+     */
     @Override
     public void afterPhase(PhaseEvent event) {
         LOG.info("After JSF Phase =================> " + event.getPhaseId());

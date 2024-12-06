@@ -24,14 +24,29 @@ import org.junit.jupiter.api.BeforeEach;
 public class AbstractJPATest {
 
     private static EntityManagerFactory emf;
+
+    /**
+     *
+     */
     protected EntityManager em;
+
+    /**
+     *
+     */
     protected EntityTransaction tx;
 
+    /**
+     *
+     */
     @BeforeAll
     public static void beforeAll() {
         emf = Persistence.createEntityManagerFactory("itmd4515testPU");
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @BeforeEach
     public void beforeEach() throws SQLException {
         em = emf.createEntityManager();
@@ -44,6 +59,10 @@ public class AbstractJPATest {
         System.out.println("Before each - create lesson\t" + lesson.getTitle());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @AfterEach
     public void afterEach() throws SQLException {
         Lesson lesson = em.createQuery("select l from Lesson l where l.title = 'Test Data'", Lesson.class).getSingleResult();
@@ -57,6 +76,9 @@ public class AbstractJPATest {
         em.close();
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterAll() {
         emf.close();

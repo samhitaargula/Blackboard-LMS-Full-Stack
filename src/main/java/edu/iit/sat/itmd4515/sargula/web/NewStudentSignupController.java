@@ -14,6 +14,8 @@ import jakarta.inject.Named;
 import java.util.logging.Logger;
 
 /**
+ * NewStudentSignupController is a JSF lightweight controller which manages
+ * the logic of new student registering on the LMS.
  *
  * @author sargula
  */
@@ -30,11 +32,14 @@ public class NewStudentSignupController {
     SuccessTimer successTimer;
 
     /**
-     *
+     * Default no-args constructor
      */
     public NewStudentSignupController() {
     }
 
+    /**
+     * Method to initialize the model
+     */
     @PostConstruct
     private void postConstruct() {
         student = new Student();
@@ -43,6 +48,7 @@ public class NewStudentSignupController {
 
     // action method
     /**
+     * Method for student sign up
      *
      * @return
      */
@@ -52,20 +58,13 @@ public class NewStudentSignupController {
         Boolean success = studentSvc.newStudentSignup(student);
         LOG.info("Signup success: " + success);
 
-        //Extra Credit 1: Create an EJB timer
-        //context.getTimerService().createTimer(5000, "Hello World!");
         if (success) {
             successTimer.createTimer();
         }
 
         return "/login.xhtml?faces-redirect=true";
     }
-
-//    @Timeout
-//    public void timeOutHandler(Timer timer) {
-//        System.out.println("timeoutHandler : " + timer.getInfo());
-//        timer.cancel();
-//    }
+    
     /**
      * Extra Credit 2: Tried to send Mail with JavaMail Resource, didn't work
      * Referred from cloudmailin docs and other Google sources
@@ -101,6 +100,7 @@ public class NewStudentSignupController {
 //    }
     
     /**
+     * Get the value of Student
      *
      * @return
      */
@@ -109,6 +109,7 @@ public class NewStudentSignupController {
     }
 
     /**
+     * Set the value of Student
      *
      * @param student
      */

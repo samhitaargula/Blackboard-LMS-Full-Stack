@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Group is a user role of the LMS, which is used to define the access level
+ * of a User in the LMS.
  *
  * @author sargula
  */
@@ -26,6 +28,14 @@ public class Group {
     private String groupName;
     private String groupDesc;
 
+    /**
+     * ManyToMany bi-directional relationship
+     * User is owning side
+     * Group is inverse side
+     *
+     * This is inverse side
+     * 
+     */
     @ManyToMany(mappedBy = "groups")
     private List<User> users = new ArrayList();
 

@@ -27,16 +27,25 @@ public class LessonValidationTest {
     private static Validator validator;
     private final Lesson l = new Lesson("Test", LocalDate.of(2022,12,20), LessonType.INTRO);
 
+    /**
+     *
+     */
     @BeforeAll
     public static void beforeAll() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
+    /**
+     *
+     */
     @BeforeEach
     public void beforeEach() {
     }
 
+    /**
+     *
+     */
     @Test
     public void lessonTitleValid() {
         System.out.println("Lesson title valid: " + l.toString());
@@ -45,6 +54,9 @@ public class LessonValidationTest {
         assertEquals(0, violations.size());
     }
     
+    /**
+     *
+     */
     @Test
     public void lessonTitleInvalid() {
         l.setTitle(" ");
@@ -55,6 +67,9 @@ public class LessonValidationTest {
         assertEquals( "must not be blank",violations.iterator().next().getMessage());
     }
     
+    /**
+     *
+     */
     @Test
     public void lessonDateValid() {
         System.out.println("Lesson date valid: " + l.toString());
@@ -63,6 +78,9 @@ public class LessonValidationTest {
         assertEquals(0, violations.size());
     }
     
+    /**
+     *
+     */
     @Test
     public void lessonDateInvalid() {
         l.setLessonDate(LocalDate.of(2026,12,20));
@@ -73,10 +91,16 @@ public class LessonValidationTest {
         assertEquals( "must be a date in the past or in the present",violations.iterator().next().getMessage());
     }
 
+    /**
+     *
+     */
     @AfterEach
     public void afterEach() {
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterAll() {
     }

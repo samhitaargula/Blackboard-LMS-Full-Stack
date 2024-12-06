@@ -14,6 +14,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
+ * Assignment entity is a task assigned to students assigned by a specific
+ * lesson's teacher. 
  *
  * @author sargula
  */
@@ -36,17 +38,6 @@ public class Assignment extends AbstractEntity {
      */
     @ManyToOne
     private Student student;
-
-    /**
-     * ManyToOne bi-directional relationship Assignment is owning side Teacher
-     * is inverse side
-     *
-     * This is owning side
-     *
-     */
-    //Removed because Teacher Assignments have mapping with Lesson in common
-//    @ManyToOne
-//    private Teacher teacher;
 
     /**
      * OneToOne uni-directional relationship
@@ -83,30 +74,30 @@ public class Assignment extends AbstractEntity {
         this.grade = grade;
     }
     
-
-    public void submitAssignment(Student s, Lesson l) { //, Teacher t
+    /**
+     * Method to add student and lesson to assignment
+     *
+     * @param s
+     * @param l
+     */
+    public void submitAssignment(Student s, Lesson l) {
         this.student = s;
-//        this.teacher = t;
         this.lesson = l;
 
         if (!s.getAssignments().contains(this)) {
             s.getAssignments().add(this);
         }
-//        if (!t.getAssignments().contains(this)) {
-//            t.getAssignments().add(this);
-//        }
     }
 
+    /**
+     * Method to remove student and lesson from assignment
+     */
     public void deleteAssignment() {
         if (this.student.getAssignments().contains(this)) {
             this.student.getAssignments().remove(this);
         }
-//        if (this.teacher.getAssignments().contains(this)) {
-//            this.teacher.getAssignments().remove(this);
-//        }
-
+        
         this.student = null;
-//        this.teacher = null;
         this.lesson = null;
     }
 
@@ -231,18 +222,38 @@ public class Assignment extends AbstractEntity {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Get the value of grade
+     *
+     * @return
+     */
     public char getGrade() {
         return grade;
     }
 
+    /**
+     * Set the value of grade
+     *
+     * @param grade
+     */
     public void setGrade(char grade) {
         this.grade = grade;
     }
 
+    /**
+     * Get the value of title
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Set the value of title
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }

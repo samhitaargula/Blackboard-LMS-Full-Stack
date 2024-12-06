@@ -9,6 +9,7 @@ import jakarta.persistence.NamedQuery;
 import java.util.Objects;
 
 /**
+ * Subject entity stores the specialized subjects taught by teachers.
  *
  * @author sargula
  */

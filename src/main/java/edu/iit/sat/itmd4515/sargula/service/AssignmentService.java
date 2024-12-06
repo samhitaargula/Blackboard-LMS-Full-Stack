@@ -12,26 +12,46 @@ import jakarta.ejb.Stateless;
 import java.util.List;
 
 /**
+ * AssignmentService class for service functions of Assignment.
  *
  * @author sargula
  */
 @Stateless
 public class AssignmentService extends AbstractService<Assignment> {
 
+    /**
+     * Default no-args constructor
+     */
     public AssignmentService() {
         super(Assignment.class);
     }
 
+    /**
+     * Method to read all Assignment records
+     *
+     * @return
+     */
     public List<Assignment> readAll() {
         return super.readAll("Assignment.readAll");
     }
 
+    /**
+     * Method to get Assignments For Teacher
+     *
+     * @param teacher
+     * @return
+     */
     public List<Assignment> getAssignmentsForTeacher(Teacher teacher) {
         Teacher managedTeacherRef = em.getReference(Teacher.class, teacher.getId());
 
         return em.createNamedQuery("Assignment.findAssignmentsForTeacher", Assignment.class).setParameter("teacherid", managedTeacherRef.getId()).getResultList();
     }
     
+    /**
+     * Method to submit Assignment
+     *
+     * @param assignment
+     */
     public void submitAssignment(Assignment assignment) {
         Assignment newAssignment = new Assignment(assignment.getTitle(), assignment.getDate(), assignment.getTime(), assignment.getGrade());
 
@@ -43,6 +63,11 @@ public class AssignmentService extends AbstractService<Assignment> {
         em.persist(newAssignment);
     }
 
+    /**
+     * Method to edit Assignment
+     *
+     * @param assignment
+     */
     public void editAssignment(Assignment assignment) {
         Assignment managedRef = em.getReference(Assignment.class, assignment.getId());
 
@@ -56,6 +81,11 @@ public class AssignmentService extends AbstractService<Assignment> {
         em.merge(managedRef);
     }
 
+    /**
+     * Method to delete Assignment
+     *
+     * @param assignment
+     */
     public void deleteAssignment(Assignment assignment) {
         Assignment managedAssignmentRef = em.getReference(Assignment.class, assignment.getId());
         managedAssignmentRef.deleteAssignment();

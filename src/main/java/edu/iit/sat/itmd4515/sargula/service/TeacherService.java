@@ -11,6 +11,7 @@ import jakarta.inject.Named;
 import java.util.List;
 
 /**
+ * TeacherService class for service methods of Teacher.
  *
  * @author sargula
  */
@@ -18,14 +19,28 @@ import java.util.List;
 @Stateless
 public class TeacherService extends AbstractService<Teacher>{
     
+    /**
+     * Default no-args constructor
+     */
     public TeacherService() {
         super(Teacher.class);
     }
     
+    /**
+     * Method to read all Teacher records.
+     *
+     * @return
+     */
     public List<Teacher> readAll(){
         return super.readAll("Teacher.readAll");
     }
     
+    /**
+     * Method to find Teacher record by Username
+     *
+     * @param uname
+     * @return
+     */
     public Teacher findByUsername(String uname){
         return em.createNamedQuery("Teacher.findByUsername", Teacher.class).setParameter("uname", uname).getSingleResult();
     }

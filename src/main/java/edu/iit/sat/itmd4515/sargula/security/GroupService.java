@@ -9,16 +9,25 @@ import jakarta.ejb.Stateless;
 import java.util.List;
 
 /**
+ * GroupService class for Group functions.
  *
  * @author sargula
  */
 @Stateless
 public class GroupService extends AbstractService<Group> {
 
+    /**
+     * Default no-args constructor
+     */
     public GroupService() {
         super(Group.class);
     }
     
+    /**
+     * Method to read all groups
+     *
+     * @return
+     */
     public List<Group> readAll(){
         return super.readAll("Group.findAll");
     }

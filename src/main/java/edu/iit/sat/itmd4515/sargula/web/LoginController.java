@@ -23,6 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * LoginController is a lightweight JSF controller which manages
+ * the logic of login to the LMS.
  *
  * @author sargula
  */
@@ -40,11 +42,14 @@ public class LoginController {
     private User user;
 
     /**
-     *
+     * Default no-args constructor
      */
     public LoginController() {
     }
 
+    /**
+     * Method to initialize the model
+     */
     @PostConstruct
     private void postConstruct() {
         LOG.info("Inside LoginController.postConstruct()");
@@ -52,6 +57,7 @@ public class LoginController {
     }
     
     /**
+     * Method to get Authenticated Username
      *
      * @return
      */
@@ -59,19 +65,35 @@ public class LoginController {
         return securityContext.getCallerPrincipal().getName();
     }
     
+    /**
+     * Method to check if user role is Teacher
+     *
+     * @return
+     */
     public boolean isTeacher(){
         return securityContext.isCallerInRole("TEACHER_ROLE");
     }
 
+    /**
+     * Method to check if user role is Student
+     *
+     * @return
+     */
     public boolean isStudent(){
         return securityContext.isCallerInRole("STUDENT_ROLE");
     }
 
+    /**
+     * Method to check if user role is Admin
+     *
+     * @return
+     */
     public boolean isAdmin(){
         return securityContext.isCallerInRole("ADMIN_ROLE");
     }
 
     /**
+     * Method to login to the LMS
      *
      * @return
      */
@@ -103,6 +125,7 @@ public class LoginController {
     }
 
     /**
+     * Method to logout of the LMS
      *
      * @return
      */
@@ -120,6 +143,7 @@ public class LoginController {
     }
 
     /**
+     * Method to get User
      *
      * @return
      */
@@ -128,6 +152,7 @@ public class LoginController {
     }
 
     /**
+     * Method to set User
      *
      * @param user
      */

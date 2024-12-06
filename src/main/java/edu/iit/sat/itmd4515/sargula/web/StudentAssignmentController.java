@@ -16,7 +16,11 @@ import jakarta.inject.Named;
 import java.util.logging.Logger;
 
 /**
- *
+ * StudentAssignmentController is a JSF lightweight controller which manages
+ * the logic of student working with assignments.
+ * 
+ * This includes creating, editing, viewing or deleting an assignment submission.
+ * 
  * @author sargula
  */
 @Named
@@ -32,9 +36,15 @@ public class StudentAssignmentController {
     @EJB
     AssignmentService assignmentSvc;
 
+    /**
+     * Default no-args constructor
+     */
     public StudentAssignmentController() {
     }
 
+    /**
+     * Method to initialize the model
+     */
     @PostConstruct
     private void postConstruct() {
         assignment = new Assignment();
@@ -46,10 +56,22 @@ public class StudentAssignmentController {
     }
 
     // action methods
+
+    /**
+     * Method to display submit assignment page with no param
+     * 
+     * @return
+     */
     public String displaySubmitAssignmentPage() {
         return "/student/submitAssignment.xhtml";
     }
 
+    /**
+     * Method to display Assignment Details Page with param
+     * 
+     * @param a
+     * @return
+     */
     public String displayAssignmentDetailsPage(Assignment a) {
         this.assignment = a;
         LOG.info("Inside displayAssignmentDetailsPage with " + assignment.toString());
@@ -57,6 +79,12 @@ public class StudentAssignmentController {
         return "/student/assignmentDetails.xhtml";
     }
 
+    /**
+     * Method to display Edit Assignment Page
+     *
+     * @param a
+     * @return
+     */
     public String displayEditAssignmentPage(Assignment a) {
         this.assignment = a;
         LOG.info("Inside displayEditAssignmentPage with " + assignment.toString());
@@ -64,6 +92,12 @@ public class StudentAssignmentController {
         return "/student/editAssignment.xhtml";
     }
 
+    /**
+     * Method to display Delete Assignment Page
+     *
+     * @param a
+     * @return
+     */
     public String displayDeleteAssignmentPage(Assignment a) {
         this.assignment = a;
         LOG.info("Inside displayDeleteAssignmentPage with " + assignment.toString());
@@ -72,6 +106,12 @@ public class StudentAssignmentController {
     }
 
     // action methods called in the final step
+
+    /**
+     * Logic method for submit Assignment
+     *
+     * @return
+     */
     public String submitAssignment() {
         LOG.info("Inside submitAssignment with " + assignment.toString());
 
@@ -80,6 +120,11 @@ public class StudentAssignmentController {
         return "/student/welcome.xhtml?faces-redirect=true";
     }
     
+    /**
+     * Logic method for edit Assignment
+     *
+     * @return
+     */
     public String editAssignment() {
         LOG.info("Inside editAssignment() before call to service: " + assignment.toString());
         assignmentSvc.editAssignment(assignment);
@@ -87,6 +132,11 @@ public class StudentAssignmentController {
         return "/student/welcome.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Logic method for delete Assignment
+     *
+     * @return
+     */
     public String deleteAssignment() {
         LOG.info("Inside deleteAssignment() before call to service: " + assignment.toString());
         assignmentSvc.deleteAssignment(assignment);

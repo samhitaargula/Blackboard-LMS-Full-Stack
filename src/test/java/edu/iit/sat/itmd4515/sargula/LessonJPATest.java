@@ -17,6 +17,10 @@ import org.junit.jupiter.api.Test;
  */
 public class LessonJPATest extends AbstractJPATest {
     
+    /**
+     *
+     * @throws SQLException
+     */
     @Test
     public void createTest() throws SQLException {
         Lesson lesson = new Lesson("Lesson 1 - Introduction", LocalDate.of(2024, 9, 19), LessonType.INTRO);
@@ -32,6 +36,10 @@ public class LessonJPATest extends AbstractJPATest {
         assertEquals("Lesson 1 - Introduction", readBackFromDatabase.getTitle());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Test
     public void readTest() throws SQLException {
         Lesson lesson = new Lesson("Lesson 2 - OOPs concepts", LocalDate.of(2024, 9, 21), LessonType.INTRO);
@@ -47,6 +55,10 @@ public class LessonJPATest extends AbstractJPATest {
         assertEquals(LocalDate.of(2024,9,21), readBackFromDatabase.getLessonDate());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Test
     public void updateTest() throws SQLException {
         Lesson lesson = em.createQuery("select l from Lesson l where l.title = 'Test Data'", Lesson.class).getSingleResult();
@@ -64,6 +76,10 @@ public class LessonJPATest extends AbstractJPATest {
         assertEquals(LocalDate.of(2024,9,21),readBackFromDatabase.getLessonDate());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Test
     public void deleteTest() throws SQLException {
         Lesson lesson = em.createQuery("select l from Lesson l where l.title = 'Lesson 2 - OOPs concepts'", Lesson.class).getSingleResult();

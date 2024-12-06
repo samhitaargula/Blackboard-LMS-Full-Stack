@@ -13,6 +13,7 @@ import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
 
 /**
+ * LessonConverter class for JSF converter for Lesson.
  *
  * @author sargula
  */
@@ -21,12 +22,26 @@ public class LessonConverter implements Converter<Lesson> {
 
     @EJB LessonService lessonService;
     
+    /**
+     *
+     * @param fc
+     * @param uic
+     * @param value
+     * @return
+     */
     @Override
     public Lesson getAsObject(FacesContext fc, UIComponent uic, String value) {
         // Here, we are taking a String, and returning an Object
         return lessonService.read(Long.valueOf(value));
     }
 
+    /**
+     *
+     * @param fc
+     * @param uic
+     * @param value
+     * @return
+     */
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Lesson value) {
         // Here, we are taking an Object, and returning a String

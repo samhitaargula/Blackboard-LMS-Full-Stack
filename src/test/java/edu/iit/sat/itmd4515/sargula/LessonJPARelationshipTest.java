@@ -19,6 +19,9 @@ import org.junit.jupiter.api.Test;
  */
 public class LessonJPARelationshipTest extends AbstractJPATest {
 
+    /**
+     *
+     */
     @Test
     public void uniDirectionalTestCase() {
         Subject subject = new Subject("Math");
@@ -47,6 +50,9 @@ public class LessonJPARelationshipTest extends AbstractJPATest {
 
     }
 
+    /**
+     *
+     */
     @Test
     public void biDirectionalTestCase() {
         Student s = new Student("Sam Student", "samstu@iit.edu");

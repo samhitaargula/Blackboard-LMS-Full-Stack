@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Teacher is a person entity, who is the teaching entity in our LMS.
  *
  * @author sargula
  */
@@ -46,16 +47,9 @@ public class Teacher extends AbstractPerson {
     private List<Lesson> lessons = new ArrayList<>();
 
     /**
-     * OneToMany bi-directional relationship Assignment is owning side Teacher
-     * is inverse side
-
-     * This is inverse side
-     *
+     * OneToOne uni-directional relationship
+     * 
      */
-    //Removed because Teacher Assignments have mapping with Lesson in common
-//    @OneToMany(mappedBy = "teacher")
-//    private List<Assignment> assignments = new ArrayList<>();
-    
     @OneToOne
     @JoinColumn(name = "USERNAME")
     private User user;
@@ -96,7 +90,7 @@ public class Teacher extends AbstractPerson {
     /**
      * Get the value of lessons
      *
-     * @return List<Lesson>
+     * @return List of lessons
      */
     public List<Lesson> getLessons() {
         return lessons;
@@ -188,10 +182,20 @@ public class Teacher extends AbstractPerson {
         }
     }
 
+    /**
+     * Get the value of User
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Set the value of User
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Lesson entity is the smallest unit of learning taught by teachers to students.
  *
  * @author sargula
  */
@@ -60,7 +61,6 @@ public class Lesson extends AbstractEntity {
      *
      */
     @ManyToOne
-//    (mappedBy = "lessons")
     private Teacher teacher;
 
     /**
@@ -197,6 +197,7 @@ public class Lesson extends AbstractEntity {
     }
 
     /**
+     * Get the value of students
      *
      * @return
      */
@@ -205,6 +206,7 @@ public class Lesson extends AbstractEntity {
     }
 
     /**
+     * Set the value of students
      *
      * @param student
      */
@@ -213,6 +215,7 @@ public class Lesson extends AbstractEntity {
     }
 
     /**
+     * Get the value of teacher
      *
      * @return
      */
@@ -221,6 +224,7 @@ public class Lesson extends AbstractEntity {
     }
 
     /**
+     * Set the value of students
      *
      * @param teacher
      */
@@ -228,10 +232,20 @@ public class Lesson extends AbstractEntity {
         this.teacher = teacher;
     }
 
+    /**
+     * Get the value of assignment
+     *
+     * @return
+     */
     public Assignment getAssignment() {
         return assignment;
     }
 
+    /**
+     * Set the value of assignment
+     *
+     * @param assignment
+     */
     public void setAssignment(Assignment assignment) {
         this.assignment = assignment;
     }

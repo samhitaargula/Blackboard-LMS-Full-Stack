@@ -14,6 +14,8 @@ import jakarta.persistence.Version;
 import java.time.LocalDateTime;
 
 /**
+ * AbstractEntity class to store abstract fields that can be reused in all the
+ * domain entities.
  *
  * @author sargula
  */
@@ -31,11 +33,17 @@ public class AbstractEntity {
 
     private LocalDateTime updatedTimestamp;
     
+    /**
+     * Init method for created timestamp
+     */
     @PrePersist
     private void initCreatedTimestamp() {
         createdTimestamp = LocalDateTime.now();
     }
     
+    /**
+     * Init method for updated timestamp
+     */
     @PreUpdate
     private void initUpdatedTimestamp() {
         updatedTimestamp = LocalDateTime.now();
@@ -101,9 +109,21 @@ public class AbstractEntity {
     public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
+
+    /**
+     * Get the value of updatedTimestamp
+     *
+     * @return
+     */
     public LocalDateTime getUpdatedTimestamp() {
         return updatedTimestamp;
     }
+
+    /**
+     * Get the value of updatedTimestamp
+     *
+     * @param updatedTimestamp
+     */
     public void setUpdatedTimestamp(LocalDateTime updatedTimestamp) {
         this.updatedTimestamp = updatedTimestamp;
     }

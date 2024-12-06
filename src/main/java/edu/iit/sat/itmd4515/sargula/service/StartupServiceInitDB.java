@@ -23,6 +23,8 @@ import java.time.LocalTime;
 import java.util.logging.Logger;
 
 /**
+ * StartupServiceInitDB to create all domain and security records at startup
+ * of the application.
  *
  * @author sargula
  */
@@ -49,9 +51,15 @@ public class StartupServiceInitDB {
     @EJB
     GroupService groupSvc;
 
+    /**
+     * Default no-args constructor
+     */
     public StartupServiceInitDB() {
     }
 
+    /**
+     * Method to initialize the entire model
+     */
     @PostConstruct
     private void postConstruct() {
         LOG.info("Inside StartupServiceInitDB.postConstruct()");
@@ -190,9 +198,7 @@ public class StartupServiceInitDB {
             }
 
             LOG.info("\tBi-directional relationship from Lesson (inverse) to Teacher >>>>>>>>>");
-//            for (Teacher t : l.getTeacher()) {
-                LOG.info("\t" + l.getTeacher().toString() + "\n");
-//            }
+            LOG.info("\t" + l.getTeacher().toString() + "\n");
         }
 
         LOG.info("-----------------------------------------------------------------------------");

@@ -8,15 +8,20 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
 
 /**
+ * AbstractPerson class to store specific fields that can be reused by people
+ * entities in the domain.
  *
  * @author sargula
  */
 @MappedSuperclass
 public class AbstractPerson extends AbstractEntity {
-    
+
     @NotBlank
     protected String name;
 
+    /**
+     * Default no-args constructor
+     */
     public AbstractPerson() {
     }
 

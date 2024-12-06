@@ -11,6 +11,8 @@ import jakarta.ejb.Timeout;
 import jakarta.ejb.Timer;
 
 /**
+ * SuccessTimer class to handle timer logic after sign up to display
+ * student user created success message.
  *
  * @author sargula
  */
@@ -20,10 +22,18 @@ public class SuccessTimer {
     @Resource
     private SessionContext context;
 
+    /**
+     * Method to create timer
+     */
     public void createTimer() {
         context.getTimerService().createTimer(5000, "Student user created!");
     }
 
+    /**
+     * Method to handle the timeOut
+     *
+     * @param timer
+     */
     @Timeout
     public void timeOutHandler(Timer timer) {
         System.out.println("TimeoutHandler : " + timer.getInfo());

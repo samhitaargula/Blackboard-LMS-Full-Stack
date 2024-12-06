@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * User is a user of the LMS who has login credentials to gain access to the system.
  *
  * @author sargula
  */
@@ -33,6 +34,14 @@ public class User {
     @NotBlank(message = "   Must enter password")
     private String password;
 
+    /**
+     * ManyToMany bi-directional relationship
+     * User is owning side
+     * Group is inverse side
+     *
+     * This is owning side
+     * 
+     */
     @ManyToMany
     @JoinTable(name = "SEC_USER_GROUPS",
             joinColumns = @JoinColumn(name = "USERNAME"),
@@ -50,17 +59,26 @@ public class User {
     }
 
     /**
-     *
+     * Default no-args constructor
      */
     public User() {
     }
-    
-    //ADD CHECKS!!!!!!!!
+
+    /**
+     * Method to add users to group
+     *
+     * @param g
+     */
     public void addGroup(Group g) {
         this.groups.add(g);
         g.getUsers().add(this);
     }
 
+    /**
+     * Method to remove users from group
+     *
+     * @param g
+     */
     public void removeGroup(Group g) {
         this.groups.remove(g);
         g.getUsers().remove(this);
@@ -85,6 +103,7 @@ public class User {
     }
 
     /**
+     * Get the value of password
      *
      * @return
      */
@@ -93,6 +112,7 @@ public class User {
     }
 
     /**
+     * Set the value of password
      *
      * @param password
      */
@@ -101,6 +121,7 @@ public class User {
     }
 
     /**
+     * Get the value of groups
      *
      * @return
      */
@@ -109,6 +130,7 @@ public class User {
     }
 
     /**
+     * Set the value of groups
      *
      * @param groups
      */

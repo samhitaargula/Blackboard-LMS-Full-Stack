@@ -14,6 +14,8 @@ import jakarta.inject.Named;
 import java.util.logging.Logger;
 
 /**
+ * StudentAssignmentController is a JSF lightweight controller which manages
+ * the logic of Student welcome page.
  *
  * @author sargula
  */
@@ -27,9 +29,15 @@ public class StudentWelcomeController {
     @Inject LoginController loginController;
     @EJB StudentService studentSvc;
     
+    /**
+     * Default no-args constructor
+     */
     public StudentWelcomeController() {
     }
 
+    /**
+     * Method to initialize the model
+     */
     @PostConstruct
     private void postConstruct() {
         LOG.info("Inside StudentWelcomeController.postConstruct with " + loginController.getAuthenticatedUsername() );
@@ -37,10 +45,20 @@ public class StudentWelcomeController {
         LOG.info("Inside StudentWelcomeController.postConstruct with " + student.toString() );
     }
     
+    /**
+     * Get the value of Student
+     *
+     * @return
+     */
     public Student getStudent() {
         return student;
     }
 
+    /**
+     * Set the value of Student
+     *
+     * @param student
+     */
     public void setStudent(Student student) {
         this.student = student;
     }

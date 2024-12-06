@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 import java.util.List;
 
 /**
+ * LessonService class for service functions of Lesson.
  *
  * @author sargula
  */
@@ -21,13 +22,14 @@ import java.util.List;
 public class LessonService extends AbstractService<Lesson>{
 
     /**
-     *
+     * Default no-args constructor
      */
     public LessonService() {
         super(Lesson.class);
     }
     
     /**
+     * Method to read All Lesson records
      *
      * @return
      */
@@ -37,12 +39,19 @@ public class LessonService extends AbstractService<Lesson>{
 
     /**
      * service to expose all possible lesson types for drop-down use
+     * 
      * @return
      */
     public LessonType[] getAllLessonTypes() {
         return LessonType.values();
     }
     
+    /**
+     * Method to create Lesson For Authenticated Teacher
+     *
+     * @param lesson
+     * @param student
+     */
     public void createLessonForAuthenticatedTeacher(Lesson lesson, Teacher student) {
         em.persist(lesson);
         
@@ -51,6 +60,11 @@ public class LessonService extends AbstractService<Lesson>{
         em.merge(teacherRef);
     }
     
+    /**
+     * Method to edit Lesson For Authenticated Teacher
+     *
+     * @param lesson
+     */
     public void editLessonForAuthenticatedTeacher(Lesson lesson) {
         Lesson managedRef = em.getReference(Lesson.class, lesson.getId());
         
@@ -61,6 +75,12 @@ public class LessonService extends AbstractService<Lesson>{
         em.merge(managedRef);
     }
     
+    /**
+     * Method to delete Lesson For Authenticated Teacher
+     *
+     * @param lesson
+     * @param teacher
+     */
     public void deleteLessonForAuthenticatedTeacher(Lesson lesson, Teacher teacher) {
         Teacher managedTeacherRef = em.getReference(Teacher.class, teacher.getId());
         Lesson managedLessonRef = em.getReference(Lesson.class, lesson.getId());

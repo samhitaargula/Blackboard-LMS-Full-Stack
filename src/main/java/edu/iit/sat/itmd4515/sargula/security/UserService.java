@@ -9,16 +9,25 @@ import jakarta.ejb.Stateless;
 import java.util.List;
 
 /**
+ * UserService class for User functions.
  *
  * @author sargula
  */
 @Stateless
 public class UserService extends AbstractService<User> {
 
+    /**
+     * Default no-args constructor
+     */
     public UserService() {
         super(User.class);
     }
     
+    /**
+     * Method to read all users
+     *
+     * @return
+     */
     public List<User> readAll(){
         return super.readAll("User.findAll");
     }

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Student is a person entity, who is the learner in our LMS.
  *
  * @author sargula
  */
@@ -123,7 +124,7 @@ public class Student extends AbstractPerson {
     /**
      * Get the value of lessons
      *
-     * @return List<Lesson>
+     * @return List of lessons
      */
     public List<Lesson> getLessons() {
         return lessons;
@@ -141,7 +142,7 @@ public class Student extends AbstractPerson {
     /**
      * Get the value of assignments
      *
-     * @return List<Assignment>
+     * @return List of assignments
      */
     public List<Assignment> getAssignments() {
         return assignments;
@@ -205,10 +206,20 @@ public class Student extends AbstractPerson {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Get the value of User
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Set the value of User
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }

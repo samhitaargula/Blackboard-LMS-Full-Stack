@@ -12,6 +12,7 @@ import jakarta.inject.Named;
 import java.util.List;
 
 /**
+ * StudentService class for service methods of Student.
  *
  * @author sargula
  */
@@ -19,18 +20,38 @@ import java.util.List;
 @Stateless
 public class StudentService extends AbstractService<Student>{
     
+    /**
+     * Default no-args constructor
+     */
     public StudentService() {
         super(Student.class);
     }
     
+    /**
+     * Method to read all Student records.
+     *
+     * @return
+     */
     public List<Student> readAll(){
         return super.readAll("Student.readAll");
     }
     
+    /**
+     * Method to find Student record by Username
+     *
+     * @param uname
+     * @return
+     */
     public Student findByUsername(String uname){
         return em.createNamedQuery("Student.findByUsername", Student.class).setParameter("uname", uname).getSingleResult();
     }
     
+    /**
+     * Method to add users and groups on new Student on Signup
+     *
+     * @param s
+     * @return
+     */
     public boolean newStudentSignup(Student s) {
         Group studentGroup
                 = em.createQuery("select g from Group g where g.groupName = 'STUDENT_GROUP'", Group.class).getSingleResult();

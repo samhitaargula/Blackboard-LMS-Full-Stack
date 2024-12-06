@@ -10,15 +10,21 @@ import jakarta.persistence.PreUpdate;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 /**
+ * UserPasswordHash class to encrypt user passwords with hashing.
  *
  * @author sargula
  */
 public class UserPasswordHash {
-    @Inject private Pbkdf2PasswordHash hash;
-    
+
+    @Inject
+    private Pbkdf2PasswordHash hash;
+
+    /**
+     * Method to encrypt user passwords with hashing.
+     */
     @PrePersist
     @PreUpdate
-    private void hashPassword(User u){
+    private void hashPassword(User u) {
         u.setPassword(hash.generate(u.getPassword().toCharArray()));
     }
 }
