@@ -191,7 +191,7 @@ Once you finish installation, select the project, right click and select Clean a
 ### Runtime
 To run, you can right click on project once again and select run or click on the run button from the toolbar. This will run the project and give you runtime and Payara logs. This will automatically open http://localhost:8080/sargula-fp/ in your browser, for a successful run.
 ![image](https://github.com/user-attachments/assets/2a456321-0284-4d99-97b8-5050ead5f409)
-![image](https://github.com/user-attachments/assets/3f6e82c0-635a-4dc8-89bb-1e8e708cde89)
+![image](https://github.com/user-attachments/assets/489f0def-bb82-4056-8927-88e944438b85)
 
 ### Database
 To check database changes, you can use MySQL Workbench or CLI.
