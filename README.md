@@ -1,0 +1,1 @@
+This is my Full Stack project for a LMS called Blackboard. For more details, check out the [Final Project Readme](https://github.com/samhitaargula/Blackboard-LMS-Full-Stack/blob/master/Final%20Project%20Readme.md).
